@@ -1,0 +1,234 @@
+# FashionHub — Playwright E2E Test Suite
+
+Production-quality end-to-end tests for the [FashionHub](https://pocketaces2.github.io/fashionhub/) demo app, built with [Playwright](https://playwright.dev/) and TypeScript.
+
+## Features
+
+| Capability | Details |
+|---|---|
+| **Cross-browser** | Chromium, Firefox, WebKit (Safari) |
+| **Multi-environment** | local · staging · production (config file or CLI) |
+| **Page Object Model** | `BasePage` → `LoginPage` / `AccountPage` |
+| **Custom Fixtures** | Page objects auto-injected into tests |
+| **CI/CD ready** | GitHub Actions + Jenkinsfile + Docker |
+
+---
+
+## Prerequisites
+
+- **Node.js** ≥ 18
+- **npm** ≥ 9
+- _(Optional)_ **Docker** for containerised runs
+
+---
+
+## Installation
+
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd fashionhub-tests
+
+# Install dependencies
+npm install
+
+# Install Playwright browsers (first time only)
+npx playwright install --with-deps
+```
+
+---
+
+## Environment Configuration
+
+Environment is resolved in this **priority order** (highest wins):
+
+| Priority | Method | Example |
+|---|---|---|
+| 1st | `BASE_URL` env var | `BASE_URL=https://staging-env/fashionhub/ npx playwright test` |
+| 2nd | `TEST_ENV` env var | `TEST_ENV=staging npx playwright test` |
+| 3rd | `.env` file | Copy `.env.example` → `.env` and set values |
+| 4th | Default | `https://pocketaces2.github.io/fashionhub/` (production) |
+
+### Available named environments (`TEST_ENV`)
+
+| Name | URL |
+|---|---|
+| `local` | `http://localhost:4000/fashionhub/` |
+| `staging` | `https://staging-env/fashionhub/` |
+| `production` | `https://pocketaces2.github.io/fashionhub/` |
+
+### `.env` file setup (optional)
+
+```bash
+cp .env.example .env
+# Edit .env and uncomment the variable you want to use
+```
+
+---
+
+## Running Tests
+
+### All browsers (default)
+```bash
+npx playwright test
+# or
+npm test
+```
+
+### Specific browser
+```bash
+npm run test:chromium
+npm run test:firefox
+npm run test:webkit
+# or
+npx playwright test --project=chromium
+```
+
+### Specific environment (CLI)
+```bash
+# Using a named environment
+TEST_ENV=production npx playwright test
+
+# Using a full URL override
+BASE_URL=https://pocketaces2.github.io/fashionhub/ npx playwright test
+
+# Local app (requires Docker app running — see below)
+TEST_ENV=local npx playwright test
+```
+
+### Headed mode (watch the browser)
+```bash
+npm run test:headed
+```
+
+### Debug mode (Playwright Inspector)
+```bash
+npm run test:debug
+```
+
+### View HTML report
+```bash
+npm run test:report
+# or after a run:
+npx playwright show-report
+```
+
+---
+
+## Running the App Locally (Docker)
+
+To test against the `local` environment, first start the app container:
+
+```bash
+docker pull pocketaces2/fashionhub
+docker run -p 4000:80 pocketaces2/fashionhub
+```
+
+Then in a new terminal:
+```bash
+TEST_ENV=local npx playwright test
+```
+
+---
+
+## Running Tests with Docker
+
+Build and run the test suite inside a container:
+
+```bash
+# Build the image
+docker build -t fashionhub-tests .
+
+# Run against production (default)
+docker run --rm fashionhub-tests
+
+# Run against a specific environment
+docker run --rm -e TEST_ENV=staging fashionhub-tests
+
+# Override with a full URL
+docker run --rm -e BASE_URL=https://your-env.example.com/fashionhub/ fashionhub-tests
+
+# Run a specific browser only
+docker run --rm fashionhub-tests npx playwright test --project=chromium
+```
+
+### Docker Compose
+
+```bash
+# Run with defaults (production)
+docker compose up --build
+
+# Override environment
+TEST_ENV=staging docker compose up --build
+
+# Override with full URL
+BASE_URL=https://your-env.example.com/fashionhub/ docker compose up --build
+```
+
+Reports are saved to `./playwright-report/` on the host.
+
+---
+
+## CI/CD Integration
+
+### GitHub Actions
+
+The workflow at `.github/workflows/playwright.yml` runs tests across all three browsers on every push and pull request, and nightly at 02:00 UTC.
+
+**Environment variables** (set as GitHub repo variables/secrets):
+- `BASE_URL` — full URL override
+- `TEST_ENV` — named environment (`production`, `staging`, etc.)
+
+You can also trigger a manual run via **Actions → Playwright Tests → Run workflow** and choose a specific environment and browser.
+
+### Jenkins
+
+The `Jenkinsfile` provides a declarative pipeline with:
+- **Parameters**: `TEST_ENV`, `BASE_URL`, `BROWSER`
+- **Docker agent**: uses `mcr.microsoft.com/playwright:v1.51.0-noble`
+- **Artifacts**: HTML report archived and published via the HTML Publisher plugin
+
+---
+
+## Project Structure
+
+```
+fashionhub-tests/
+├── src/
+│   ├── pages/
+│   │   ├── BasePage.ts          # Abstract base for all page objects
+│   │   ├── LoginPage.ts         # Login form interactions
+│   │   └── AccountPage.ts       # Post-login / welcome page interactions
+│   ├── fixtures/
+│   │   └── index.ts             # Extended test with auto-injected page objects
+│   ├── data/
+│   │   └── users.ts             # Typed test credentials
+│   └── utils/
+│       └── env.ts               # Environment URL resolution logic
+├── tests/
+│   └── auth/
+│       └── login.spec.ts        # Login feature scenarios (BDD-style)
+├── .github/
+│   └── workflows/
+│       └── playwright.yml       # GitHub Actions CI workflow
+├── playwright.config.ts         # Playwright configuration
+├── Dockerfile                   # Container image for test runs
+├── docker-compose.yml           # Compose service with env passthrough
+├── Jenkinsfile                  # Jenkins declarative pipeline
+├── tsconfig.json
+├── package.json
+├── .env.example                 # Environment variable template
+└── README.md
+```
+
+---
+
+## Test Scenarios
+
+| # | Scenario | Type |
+|---|---|---|
+| 1 | Valid credentials → redirect + welcome message with username | ✅ Happy path |
+| 2 | Wrong password → stays on login page | 🔴 Negative |
+| 3 | Non-existent username → stays on login page | 🔴 Negative |
+| 4 | Empty fields → does not navigate away | ⚠️ Edge case |
+| 5 | Login page loads with correct title | 🟡 Smoke |

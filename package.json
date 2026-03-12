@@ -1,0 +1,21 @@
+{
+  "name": "fashionhub-tests",
+  "version": "1.0.0",
+  "description": "Playwright E2E test suite for FashionHub — cross-browser, multi-environment",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.51.0",
+    "dotenv": "^16.4.7",
+    "typescript": "^5.4.5"
+  }
+}

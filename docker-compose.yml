@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  playwright-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # Pass the target environment from the host shell.
+      # Priority: BASE_URL > TEST_ENV > default (production).
+      - BASE_URL=${BASE_URL:-}
+      - TEST_ENV=${TEST_ENV:-production}
+      - CI=true
+    volumes:
+      # Mount report output so it's accessible on the host after the run
+      - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
+    # Override the default CMD to run a specific browser:
+    #   docker compose run playwright-tests npx playwright test --project=chromium
