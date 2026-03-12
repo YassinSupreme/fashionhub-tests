@@ -9,9 +9,12 @@ import { BasePage } from './BasePage';
  * Key DOM selectors:
  *   - Cart items:   .cart-item
  *   - Item name:    .cart-item h3
- *   - Total:        .total
+ *   - Total:        #total-price
  *   - Remove btn:   .cart-item button
  *   - Checkout btn: button:has-text("Checkout")
+ *
+ * Note: the Checkout button triggers a browser alert as a placeholder.
+ * Use clickCheckoutAndGetDialog() to intercept and return the dialog message.
  */
 export class CartPage extends BasePage {
   private readonly cartItems: Locator;
@@ -57,13 +60,28 @@ export class CartPage extends BasePage {
   async removeItem(productName: string): Promise<void> {
     const item = this.cartItems.filter({ has: this.page.locator(`h3:text("${productName}")`) });
     await item.locator('button').click();
-    // Small wait to allow DOM to update
     await this.page.waitForTimeout(300);
   }
 
-  /** Clicks the Checkout button. */
+  /** Clicks the Checkout button (no dialog handling). */
   async clickCheckout(): Promise<void> {
     await this.checkoutButton.click();
+  }
+
+  /**
+   * Clicks the Checkout button and intercepts the browser alert dialog.
+   * Returns the dialog message text (e.g. "Proceeding to checkout.").
+   */
+  async clickCheckoutAndGetDialog(): Promise<string> {
+    let dialogMessage = '';
+    this.page.once('dialog', async (dialog) => {
+      dialogMessage = dialog.message();
+      await dialog.accept();
+    });
+    await this.checkoutButton.click();
+    // Give the dialog handler time to fire
+    await this.page.waitForTimeout(500);
+    return dialogMessage;
   }
 
   /** Returns true if the Checkout button is visible. */

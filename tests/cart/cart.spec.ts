@@ -6,6 +6,7 @@ import { test, expect } from '../../src/fixtures/index';
  * Tests the FashionHub cart page covering:
  *   🟡 Smoke:       page loads with correct title
  *   ✅ Happy Path:  empty state, add item and verify, total format, remove item
+ *   🛒 Checkout:    dialog confirmation and page stays on cart
  */
 test.describe('Feature: FashionHub Shopping Cart', () => {
 
@@ -96,6 +97,31 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
       // Then the cart should have one fewer item
       const countAfter = await cartPage.getCartItemCount();
       expect(countAfter).toBe(countBefore - 1);
+    },
+  );
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // Scenario 6 — Checkout flow
+  // ──────────────────────────────────────────────────────────────────────────
+  test(
+    'Scenario: Checking out triggers a confirmation dialog and stays on the cart page',
+    async ({ productsPage, cartPage }) => {
+      // Given there is at least one product in the cart
+      await productsPage.goto();
+      await productsPage.addProductToCart('Peacock Coat');
+      await cartPage.goto();
+
+      const itemCountBefore = await cartPage.getCartItemCount();
+      expect(itemCountBefore).toBeGreaterThan(0);
+
+      // When the user clicks "Checkout"
+      const dialogMessage = await cartPage.clickCheckoutAndGetDialog();
+
+      // Then a browser dialog should appear confirming the checkout intent
+      expect(dialogMessage).toMatch(/proceeding to checkout/i);
+
+      // And the user should remain on the cart page (checkout is a placeholder)
+      await expect(cartPage.page).toHaveURL(/cart\.html/);
     },
   );
 });
