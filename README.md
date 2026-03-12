@@ -7,8 +7,8 @@ Production-quality end-to-end tests for the [FashionHub](https://pocketaces2.git
 | Capability | Details |
 |---|---|
 | **Cross-browser** | Chromium, Firefox, WebKit (Safari) |
-| **Multi-environment** | local · staging · production (config file or CLI) |
-| **Page Object Model** | `BasePage` → `LoginPage` / `AccountPage` |
+| **Multi-environment** | local - staging - production (config file or CLI) |
+| **Page Object Model** | `BasePage` -> `LoginPage` / `AccountPage` / `HomePage` / `ProductsPage` / `CartPage` / `AboutPage` |
 | **Custom Fixtures** | Page objects auto-injected into tests |
 | **CI/CD ready** | GitHub Actions + Jenkinsfile + Docker |
 
@@ -16,8 +16,8 @@ Production-quality end-to-end tests for the [FashionHub](https://pocketaces2.git
 
 ## Prerequisites
 
-- **Node.js** ≥ 18
-- **npm** ≥ 9
+- **Node.js** >= 18
+- **npm** >= 9
 - _(Optional)_ **Docker** for containerised runs
 
 ---
@@ -25,14 +25,9 @@ Production-quality end-to-end tests for the [FashionHub](https://pocketaces2.git
 ## Installation
 
 ```bash
-# Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/YassinSupreme/fashionhub-tests.git
 cd fashionhub-tests
-
-# Install dependencies
 npm install
-
-# Install Playwright browsers (first time only)
 npx playwright install --with-deps
 ```
 
@@ -40,16 +35,14 @@ npx playwright install --with-deps
 
 ## Environment Configuration
 
-Environment is resolved in this **priority order** (highest wins):
-
 | Priority | Method | Example |
 |---|---|---|
 | 1st | `BASE_URL` env var | `BASE_URL=https://staging-env/fashionhub/ npx playwright test` |
 | 2nd | `TEST_ENV` env var | `TEST_ENV=staging npx playwright test` |
-| 3rd | `.env` file | Copy `.env.example` → `.env` and set values |
+| 3rd | `.env` file | Copy `.env.example` -> `.env` and set values |
 | 4th | Default | `https://pocketaces2.github.io/fashionhub/` (production) |
 
-### Available named environments (`TEST_ENV`)
+### Named environments (`TEST_ENV`)
 
 | Name | URL |
 |---|---|
@@ -57,75 +50,45 @@ Environment is resolved in this **priority order** (highest wins):
 | `staging` | `https://staging-env/fashionhub/` |
 | `production` | `https://pocketaces2.github.io/fashionhub/` |
 
-### `.env` file setup (optional)
-
-```bash
-cp .env.example .env
-# Edit .env and uncomment the variable you want to use
-```
-
 ---
 
 ## Running Tests
 
-### All browsers (default)
 ```bash
-npx playwright test
-# or
+# All browsers
 npm test
-```
 
-### Specific browser
-```bash
+# Single browser
 npm run test:chromium
 npm run test:firefox
 npm run test:webkit
-# or
-npx playwright test --project=chromium
-```
 
-### Specific environment (CLI)
-```bash
-# Using a named environment
+# Single spec file
+npx playwright test tests/home/home.spec.ts
+npx playwright test tests/products/products.spec.ts
+npx playwright test tests/cart/cart.spec.ts
+npx playwright test tests/about/about.spec.ts
+npx playwright test tests/account/account.spec.ts
+npx playwright test tests/auth/login.spec.ts
+
+# Specific environment
 TEST_ENV=production npx playwright test
+BASE_URL=https://your-env.com/fashionhub/ npx playwright test
 
-# Using a full URL override
-BASE_URL=https://pocketaces2.github.io/fashionhub/ npx playwright test
-
-# Local app (requires Docker app running — see below)
-TEST_ENV=local npx playwright test
-```
-
-### Headed mode (watch the browser)
-```bash
+# Watch / debug
 npm run test:headed
-```
-
-### Debug mode (Playwright Inspector)
-```bash
 npm run test:debug
-```
-
-### View HTML report
-```bash
 npm run test:report
-# or after a run:
-npx playwright show-report
 ```
 
 ---
 
 ## Running the App Locally (Docker)
 
-To test against the `local` environment, first start the app container:
-
 ```bash
 docker pull pocketaces2/fashionhub
 docker run -p 4000:80 pocketaces2/fashionhub
-```
-
-Then in a new terminal:
-```bash
+# then in a new terminal:
 TEST_ENV=local npx playwright test
 ```
 
@@ -133,36 +96,15 @@ TEST_ENV=local npx playwright test
 
 ## Running Tests with Docker
 
-Build and run the test suite inside a container:
-
 ```bash
-# Build the image
 docker build -t fashionhub-tests .
-
-# Run against production (default)
 docker run --rm fashionhub-tests
-
-# Run against a specific environment
 docker run --rm -e TEST_ENV=staging fashionhub-tests
+docker run --rm -e BASE_URL=https://your-env.com/fashionhub/ fashionhub-tests
 
-# Override with a full URL
-docker run --rm -e BASE_URL=https://your-env.example.com/fashionhub/ fashionhub-tests
-
-# Run a specific browser only
-docker run --rm fashionhub-tests npx playwright test --project=chromium
-```
-
-### Docker Compose
-
-```bash
-# Run with defaults (production)
+# Docker Compose
 docker compose up --build
-
-# Override environment
 TEST_ENV=staging docker compose up --build
-
-# Override with full URL
-BASE_URL=https://your-env.example.com/fashionhub/ docker compose up --build
 ```
 
 Reports are saved to `./playwright-report/` on the host.
@@ -173,20 +115,13 @@ Reports are saved to `./playwright-report/` on the host.
 
 ### GitHub Actions
 
-The workflow at `.github/workflows/playwright.yml` runs tests across all three browsers on every push and pull request, and nightly at 02:00 UTC.
+Workflow at `.github/workflows/playwright.yml` runs on every push, pull request, and nightly at 02:00 UTC across all three browsers. Trigger a manual run via **Actions -> Playwright Tests -> Run workflow**.
 
-**Environment variables** (set as GitHub repo variables/secrets):
-- `BASE_URL` — full URL override
-- `TEST_ENV` — named environment (`production`, `staging`, etc.)
-
-You can also trigger a manual run via **Actions → Playwright Tests → Run workflow** and choose a specific environment and browser.
+**Secrets/variables:** `BASE_URL`, `TEST_ENV`
 
 ### Jenkins
 
-The `Jenkinsfile` provides a declarative pipeline with:
-- **Parameters**: `TEST_ENV`, `BASE_URL`, `BROWSER`
-- **Docker agent**: uses `mcr.microsoft.com/playwright:v1.51.0-noble`
-- **Artifacts**: HTML report archived and published via the HTML Publisher plugin
+`Jenkinsfile` provides a declarative pipeline with parameters `TEST_ENV`, `BASE_URL`, `BROWSER`, a Docker agent, and HTML report publishing.
 
 ---
 
@@ -198,26 +133,32 @@ fashionhub-tests/
 │   ├── pages/
 │   │   ├── BasePage.ts          # Abstract base for all page objects
 │   │   ├── LoginPage.ts         # Login form interactions
-│   │   └── AccountPage.ts       # Post-login / welcome page interactions
+│   │   ├── AccountPage.ts       # Post-login / welcome page
+│   │   ├── HomePage.ts          # Hero, nav, features, CTA
+│   │   ├── ProductsPage.ts      # Product listing, prices, add-to-cart
+│   │   ├── CartPage.ts          # Cart items, total, remove, checkout
+│   │   └── AboutPage.ts         # About headings and content
 │   ├── fixtures/
 │   │   └── index.ts             # Extended test with auto-injected page objects
 │   ├── data/
 │   │   └── users.ts             # Typed test credentials
 │   └── utils/
-│       └── env.ts               # Environment URL resolution logic
+│       └── env.ts               # Environment URL resolution
 ├── tests/
-│   └── auth/
-│       └── login.spec.ts        # Login feature scenarios (BDD-style)
-├── .github/
-│   └── workflows/
-│       └── playwright.yml       # GitHub Actions CI workflow
-├── playwright.config.ts         # Playwright configuration
-├── Dockerfile                   # Container image for test runs
-├── docker-compose.yml           # Compose service with env passthrough
-├── Jenkinsfile                  # Jenkins declarative pipeline
+│   ├── auth/login.spec.ts
+│   ├── home/home.spec.ts
+│   ├── products/products.spec.ts
+│   ├── cart/cart.spec.ts
+│   ├── about/about.spec.ts
+│   └── account/account.spec.ts
+├── .github/workflows/playwright.yml
+├── playwright.config.ts
+├── Dockerfile
+├── docker-compose.yml
+├── Jenkinsfile
 ├── tsconfig.json
 ├── package.json
-├── .env.example                 # Environment variable template
+├── .env.example
 └── README.md
 ```
 
@@ -225,10 +166,64 @@ fashionhub-tests/
 
 ## Test Scenarios
 
+**Total: 30 scenarios x 3 browsers = 90 test runs**
+
+### Login (`tests/auth/login.spec.ts`)
+
 | # | Scenario | Type |
 |---|---|---|
-| 1 | Valid credentials → redirect + welcome message with username | ✅ Happy path |
-| 2 | Wrong password → stays on login page | 🔴 Negative |
-| 3 | Non-existent username → stays on login page | 🔴 Negative |
-| 4 | Empty fields → does not navigate away | ⚠️ Edge case |
-| 5 | Login page loads with correct title | 🟡 Smoke |
+| 1 | Valid credentials -> redirect + welcome message with username | Happy path |
+| 2 | Wrong password -> stays on login page | Negative |
+| 3 | Non-existent username -> stays on login page | Negative |
+| 4 | Empty fields -> does not navigate away | Edge case |
+| 5 | Login page loads with correct title | Smoke |
+
+### Home (`tests/home/home.spec.ts`)
+
+| # | Scenario | Type |
+|---|---|---|
+| 1 | Home page loads with the correct title | Smoke |
+| 2 | Hero section is visible and contains a welcome heading | Happy path |
+| 3 | "Shop Now" CTA navigates to the Products page | Happy path |
+| 4 | Navigation bar contains all expected links | Happy path |
+| 5 | Feature section displays three highlights | Happy path |
+
+### Products / Clothing (`tests/products/products.spec.ts`)
+
+| # | Scenario | Type |
+|---|---|---|
+| 1 | Products page loads with the correct title | Smoke |
+| 2 | At least one product card is displayed | Happy path |
+| 3 | Each product card shows a name and a price | Happy path |
+| 4 | Product prices are formatted as currency (e.g. `$49.99`) | Happy path |
+| 5 | Adding a product to the cart and verifying it appears in the cart | Happy path |
+
+### Shopping Cart (`tests/cart/cart.spec.ts`)
+
+| # | Scenario | Type |
+|---|---|---|
+| 1 | Cart page loads with the correct title | Smoke |
+| 2 | Visiting the cart with no items is gracefully handled | Edge case |
+| 3 | Adding a product on the products page shows it in the cart | Happy path |
+| 4 | Cart displays a total amount after adding a product | Happy path |
+| 5 | Removing an item decreases the cart item count | Happy path |
+| 6 | Checking out triggers a confirmation dialog and stays on the cart page | Happy path |
+
+### About (`tests/about/about.spec.ts`)
+
+| # | Scenario | Type |
+|---|---|---|
+| 1 | About page loads with the correct title | Smoke |
+| 2 | "About FashionHub" heading is visible | Happy path |
+| 3 | All expected subsections present (Our Story, Our Vision, Our Commitment, Join Us) | Happy path |
+| 4 | About section contains descriptive content paragraphs | Happy path |
+
+### Account (`tests/account/account.spec.ts`)
+
+| # | Scenario | Type |
+|---|---|---|
+| 1 | Account page shows correct title when logged in | Smoke |
+| 2 | Welcome message includes the logged-in username | Happy path |
+| 3 | Logout button is visible on the account page | Happy path |
+| 4 | Clicking Logout redirects user away from account page | Happy path |
+| 5 | Direct navigation to account page without login does not show welcome message | Access control |
