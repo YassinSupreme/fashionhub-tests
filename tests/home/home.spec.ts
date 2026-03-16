@@ -9,9 +9,8 @@ import { ProductsPage } from '../../src/pages/ProductsPage';
  * Linked feature file: tests/home/home.feature
  */
 test.describe('Feature: FashionHub Home Page', () => {
-
   // ── Scenario 1 — Smoke ──────────────────────────────────────────────────────
-  test('Smoke: Home page loads with the correct title', async ({ homePage }) => {
+  test('@smoke Smoke: Home page loads with the correct title', async ({ homePage }) => {
     await Given('I navigate to the Home page', async () => {
       await homePage.goto();
     });
@@ -23,7 +22,7 @@ test.describe('Feature: FashionHub Home Page', () => {
   });
 
   // ── Scenario 2 — Hero heading ────────────────────────────────────────────────
-  test('Scenario: Hero section contains a welcome heading', async ({ homePage }) => {
+  test('@regression Scenario: Hero section contains a welcome heading', async ({ homePage }) => {
     await Given('I am on the Home page', async () => {
       await homePage.goto();
     });
@@ -35,7 +34,9 @@ test.describe('Feature: FashionHub Home Page', () => {
   });
 
   // ── Scenario 3 — Shop Now CTA ────────────────────────────────────────────────
-  test('Scenario: Clicking Shop Now navigates to the Products page', async ({ homePage }) => {
+  test('@regression Scenario: Clicking Shop Now navigates to the Products page', async ({
+    homePage,
+  }) => {
     await Given('I am on the Home page', async () => {
       await homePage.goto();
     });
@@ -50,7 +51,7 @@ test.describe('Feature: FashionHub Home Page', () => {
   });
 
   // ── Scenario 4 — Navigation links ────────────────────────────────────────────
-  test('Scenario: Navigation bar contains all expected links', async ({ homePage }) => {
+  test('@regression Scenario: Navigation bar contains all expected links', async ({ homePage }) => {
     await Given('I am on the Home page', async () => {
       await homePage.goto();
     });
@@ -64,7 +65,7 @@ test.describe('Feature: FashionHub Home Page', () => {
   });
 
   // ── Scenario 5 — Feature section ─────────────────────────────────────────────
-  test('Scenario: Feature section displays three highlights', async ({ homePage }) => {
+  test('@regression Scenario: Feature section displays three highlights', async ({ homePage }) => {
     await Given('I am on the Home page', async () => {
       await homePage.goto();
     });

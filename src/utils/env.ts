@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Environment URL resolution
  *
@@ -32,9 +33,7 @@ export function resolveBaseUrl(): string {
     const url = ENVIRONMENTS[process.env.TEST_ENV];
     if (!url) {
       const valid = Object.keys(ENVIRONMENTS).join(', ');
-      throw new Error(
-        `[env] Unknown TEST_ENV "${process.env.TEST_ENV}". Valid values: ${valid}`,
-      );
+      throw new Error(`[env] Unknown TEST_ENV "${process.env.TEST_ENV}". Valid values: ${valid}`);
     }
     console.info(`[env] Using TEST_ENV "${process.env.TEST_ENV}": ${url}`);
     return url;

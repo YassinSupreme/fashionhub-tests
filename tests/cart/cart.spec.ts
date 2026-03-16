@@ -8,9 +8,8 @@ import { Given, When, Then, And } from '../../src/utils/bdd';
  * Linked feature file: tests/cart/cart.feature
  */
 test.describe('Feature: FashionHub Shopping Cart', () => {
-
   // ── Scenario 1 — Smoke ──────────────────────────────────────────────────────
-  test('Smoke: Cart page loads with the correct title', async ({ cartPage }) => {
+  test('@smoke Smoke: Cart page loads with the correct title', async ({ cartPage }) => {
     await Given('I navigate to the Cart page', async () => {
       await cartPage.goto();
     });
@@ -22,7 +21,9 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
   });
 
   // ── Scenario 2 — Empty cart ───────────────────────────────────────────────────
-  test('Scenario: Visiting an empty cart is gracefully handled', async ({ cartPage }) => {
+  test('@regression Scenario: Visiting an empty cart is gracefully handled', async ({
+    cartPage,
+  }) => {
     await Given('I am on the Cart page with no items', async () => {
       await cartPage.goto();
     });
@@ -34,7 +35,10 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
   });
 
   // ── Scenario 3 — Item appears after Add to Cart ───────────────────────────────
-  test('Scenario: Adding a product shows it in the cart', async ({ productsPage, cartPage }) => {
+  test('@regression Scenario: Adding a product shows it in the cart', async ({
+    productsPage,
+    cartPage,
+  }) => {
     await Given('I am on the Products page', async () => {
       await productsPage.goto();
     });
@@ -59,7 +63,10 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
   });
 
   // ── Scenario 4 — Cart total ────────────────────────────────────────────────────
-  test('Scenario: Cart displays a total amount after adding a product', async ({ productsPage, cartPage }) => {
+  test('@regression Scenario: Cart displays a total amount after adding a product', async ({
+    productsPage,
+    cartPage,
+  }) => {
     await Given('a product has been added to the cart', async () => {
       await productsPage.goto();
       await productsPage.addProductToCart('Peacock Coat');
@@ -73,7 +80,10 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
   });
 
   // ── Scenario 5 — Remove item ──────────────────────────────────────────────────
-  test('Scenario: Removing an item decreases the cart count', async ({ productsPage, cartPage }) => {
+  test('@regression Scenario: Removing an item decreases the cart count', async ({
+    productsPage,
+    cartPage,
+  }) => {
     await Given('"Peacock Coat" is in the cart', async () => {
       await productsPage.goto();
       await productsPage.addProductToCart('Peacock Coat');
@@ -93,7 +103,10 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
   });
 
   // ── Scenario 6 — Checkout ─────────────────────────────────────────────────────
-  test('Scenario: Checkout triggers a confirmation dialog and stays on cart', async ({ productsPage, cartPage }) => {
+  test('@regression Scenario: Checkout triggers a confirmation dialog and stays on cart', async ({
+    productsPage,
+    cartPage,
+  }) => {
     await Given('at least one product is in the cart', async () => {
       await productsPage.goto();
       await productsPage.addProductToCart('Peacock Coat');

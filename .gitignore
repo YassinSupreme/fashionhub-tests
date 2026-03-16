@@ -6,3 +6,6 @@ test-results/
 *.local
 *.resolved
 *.metadata.json
+
+# Playwright auth state (contains session tokens)
+playwright/.auth/user.json

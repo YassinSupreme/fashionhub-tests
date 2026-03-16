@@ -12,9 +12,11 @@ import { AccountPage } from '../../src/pages/AccountPage';
  * Linked feature file: tests/auth/login.feature
  */
 test.describe('Feature: FashionHub Login', () => {
-
   // ── Scenario 1 — Happy Path ─────────────────────────────────────────────────
-  test('Scenario: Valid user can log in and sees a welcome message', async ({ loginPage, accountPage }) => {
+  test('@regression Scenario: Valid user can log in and sees a welcome message', async ({
+    loginPage,
+    accountPage,
+  }) => {
     await Given('I am on the Login page', async () => {
       await loginPage.goto();
     });
@@ -35,7 +37,9 @@ test.describe('Feature: FashionHub Login', () => {
   });
 
   // ── Scenario 2 — Wrong password ─────────────────────────────────────────────
-  test('Scenario: Wrong password keeps user on the login page', async ({ loginPage }) => {
+  test('@regression Scenario: Wrong password keeps user on the login page', async ({
+    loginPage,
+  }) => {
     await Given('I am on the Login page', async () => {
       await loginPage.goto();
     });
@@ -57,7 +61,9 @@ test.describe('Feature: FashionHub Login', () => {
   });
 
   // ── Scenario 3 — Wrong username ─────────────────────────────────────────────
-  test('Scenario: Non-existent username keeps user on the login page', async ({ loginPage }) => {
+  test('@regression Scenario: Non-existent username keeps user on the login page', async ({
+    loginPage,
+  }) => {
     await Given('I am on the Login page', async () => {
       await loginPage.goto();
     });
@@ -76,7 +82,9 @@ test.describe('Feature: FashionHub Login', () => {
   });
 
   // ── Scenario 4 — Empty fields ────────────────────────────────────────────────
-  test('Scenario: Submitting empty credentials does not navigate away', async ({ loginPage }) => {
+  test('@regression Scenario: Submitting empty credentials does not navigate away', async ({
+    loginPage,
+  }) => {
     await Given('I am on the Login page', async () => {
       await loginPage.goto();
     });
@@ -92,7 +100,7 @@ test.describe('Feature: FashionHub Login', () => {
   });
 
   // ── Scenario 5 — Smoke ──────────────────────────────────────────────────────
-  test('Smoke: Login page loads and displays the login form', async ({ loginPage }) => {
+  test('@smoke Smoke: Login page loads and displays the login form', async ({ loginPage }) => {
     await Given('I navigate to the Login page', async () => {
       await loginPage.goto();
     });

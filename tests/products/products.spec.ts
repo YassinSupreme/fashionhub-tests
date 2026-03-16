@@ -9,9 +9,8 @@ import { CartPage } from '../../src/pages/CartPage';
  * Linked feature file: tests/products/products.feature
  */
 test.describe('Feature: FashionHub Products Page', () => {
-
   // ── Scenario 1 — Smoke ──────────────────────────────────────────────────────
-  test('Smoke: Products page loads with the correct title', async ({ productsPage }) => {
+  test('@smoke Smoke: Products page loads with the correct title', async ({ productsPage }) => {
     await Given('I navigate to the Products page', async () => {
       await productsPage.goto();
     });
@@ -23,7 +22,7 @@ test.describe('Feature: FashionHub Products Page', () => {
   });
 
   // ── Scenario 2 — Products visible ────────────────────────────────────────────
-  test('Scenario: At least one product card is displayed', async ({ productsPage }) => {
+  test('@regression Scenario: At least one product card is displayed', async ({ productsPage }) => {
     await Given('I am on the Products page', async () => {
       await productsPage.goto();
     });
@@ -39,7 +38,9 @@ test.describe('Feature: FashionHub Products Page', () => {
   });
 
   // ── Scenario 3 — Product card anatomy ────────────────────────────────────────
-  test('Scenario: Each product card shows a name and a price', async ({ productsPage }) => {
+  test('@regression Scenario: Each product card shows a name and a price', async ({
+    productsPage,
+  }) => {
     await Given('I am on the Products page', async () => {
       await productsPage.goto();
     });
@@ -56,7 +57,9 @@ test.describe('Feature: FashionHub Products Page', () => {
   });
 
   // ── Scenario 4 — Price format ─────────────────────────────────────────────────
-  test('Scenario: Product prices are formatted as currency (e.g. $49.99)', async ({ productsPage }) => {
+  test('@regression Scenario: Product prices are formatted as currency (e.g. $49.99)', async ({
+    productsPage,
+  }) => {
     await Given('I am on the Products page', async () => {
       await productsPage.goto();
     });
@@ -68,7 +71,10 @@ test.describe('Feature: FashionHub Products Page', () => {
   });
 
   // ── Scenario 5 — Add to Cart ──────────────────────────────────────────────────
-  test('Scenario: Adding a product to the cart updates the cart', async ({ productsPage, page }) => {
+  test('@regression Scenario: Adding a product to the cart updates the cart', async ({
+    productsPage,
+    page,
+  }) => {
     await Given('I am on the Products page', async () => {
       await productsPage.goto();
     });

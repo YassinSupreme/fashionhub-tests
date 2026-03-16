@@ -1,10 +1,10 @@
-import { test as base, request as baseRequest } from '@playwright/test';
-import { LoginPage }           from '../pages/LoginPage';
-import { AccountPage }         from '../pages/AccountPage';
-import { HomePage }            from '../pages/HomePage';
-import { ProductsPage }        from '../pages/ProductsPage';
-import { CartPage }            from '../pages/CartPage';
-import { AboutPage }           from '../pages/AboutPage';
+import { test as base } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
+import { AccountPage } from '../pages/AccountPage';
+import { HomePage } from '../pages/HomePage';
+import { ProductsPage } from '../pages/ProductsPage';
+import { CartPage } from '../pages/CartPage';
+import { AboutPage } from '../pages/AboutPage';
 import { FashionHubApiClient } from '../api/FashionHubApiClient';
 
 /**
@@ -22,26 +22,38 @@ import { FashionHubApiClient } from '../api/FashionHubApiClient';
  */
 type FashionHubFixtures = {
   // ── UI fixtures ────────────────────────────────────────────────────────────
-  loginPage:    LoginPage;
-  accountPage:  AccountPage;
-  homePage:     HomePage;
+  loginPage: LoginPage;
+  accountPage: AccountPage;
+  homePage: HomePage;
   productsPage: ProductsPage;
-  cartPage:     CartPage;
-  aboutPage:    AboutPage;
+  cartPage: CartPage;
+  aboutPage: AboutPage;
 
   // ── API fixtures ───────────────────────────────────────────────────────────
   /** Pre-configured FashionHub API client (no browser required). */
-  apiClient:    FashionHubApiClient;
+  apiClient: FashionHubApiClient;
 };
 
 export const test = base.extend<FashionHubFixtures>({
   // ── UI page objects ────────────────────────────────────────────────────────
-  loginPage:    async ({ page }, use) => { await use(new LoginPage(page)); },
-  accountPage:  async ({ page }, use) => { await use(new AccountPage(page)); },
-  homePage:     async ({ page }, use) => { await use(new HomePage(page)); },
-  productsPage: async ({ page }, use) => { await use(new ProductsPage(page)); },
-  cartPage:     async ({ page }, use) => { await use(new CartPage(page)); },
-  aboutPage:    async ({ page }, use) => { await use(new AboutPage(page)); },
+  loginPage: async ({ page }, use) => {
+    await use(new LoginPage(page));
+  },
+  accountPage: async ({ page }, use) => {
+    await use(new AccountPage(page));
+  },
+  homePage: async ({ page }, use) => {
+    await use(new HomePage(page));
+  },
+  productsPage: async ({ page }, use) => {
+    await use(new ProductsPage(page));
+  },
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
+  },
+  aboutPage: async ({ page }, use) => {
+    await use(new AboutPage(page));
+  },
 
   // ── API client ─────────────────────────────────────────────────────────────
   apiClient: async ({ request }, use) => {

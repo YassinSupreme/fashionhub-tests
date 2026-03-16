@@ -13,9 +13,8 @@ import { Given, When, Then, And } from '../../src/utils/bdd';
  */
 
 test.describe('Feature: FashionHub About Page', () => {
-
   // ── Scenario 1 — Smoke ─────────────────────────────────────────────────────
-  test('Smoke: About page loads with the correct title', async ({ aboutPage }) => {
+  test('@smoke Smoke: About page loads with the correct title', async ({ aboutPage }) => {
     await Given('I am on the FashionHub website', async () => {
       await aboutPage.goto();
     });
@@ -27,7 +26,7 @@ test.describe('Feature: FashionHub About Page', () => {
   });
 
   // ── Scenario 2 — Main heading ───────────────────────────────────────────────
-  test('Scenario: "About FashionHub" heading is visible', async ({ aboutPage }) => {
+  test('@regression Scenario: "About FashionHub" heading is visible', async ({ aboutPage }) => {
     await Given('I navigate to the About page', async () => {
       await aboutPage.goto();
     });
@@ -39,7 +38,9 @@ test.describe('Feature: FashionHub About Page', () => {
   });
 
   // ── Scenario 3 — Subsections (Scenario Outline style) ──────────────────────
-  test('Scenario Outline: All expected subsections are present', async ({ aboutPage }) => {
+  test('@regression Scenario Outline: All expected subsections are present', async ({
+    aboutPage,
+  }) => {
     const expectedSections = ['Our Story', 'Our Vision', 'Our Commitment', 'Join Us'];
 
     await Given('I am on the About page', async () => {
@@ -60,7 +61,9 @@ test.describe('Feature: FashionHub About Page', () => {
   });
 
   // ── Scenario 4 — Content not empty ─────────────────────────────────────────
-  test('Scenario: About section contains descriptive content paragraphs', async ({ aboutPage }) => {
+  test('@regression Scenario: About section contains descriptive content paragraphs', async ({
+    aboutPage,
+  }) => {
     await Given('I am on the About page', async () => {
       await aboutPage.goto();
     });
@@ -75,5 +78,4 @@ test.describe('Feature: FashionHub About Page', () => {
       expect(displayed).toBe(true);
     });
   });
-
 });

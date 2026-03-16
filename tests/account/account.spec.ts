@@ -10,17 +10,22 @@ import { validUser } from '../../src/data/users';
  * Linked feature file: tests/account/account.feature
  */
 test.describe('Feature: FashionHub Account Page', () => {
-
   // ── Shared setup helper ────────────────────────────────────────────────────
   /** Logs in with valid credentials and waits for the account page URL. */
-  async function loginAndGoToAccount(loginPage: any, accountPage: any) {
+  async function loginAndGoToAccount(
+    loginPage: { goto: () => Promise<void>; login: (u: string, p: string) => Promise<void> },
+    accountPage: { page: import('@playwright/test').Page },
+  ) {
     await loginPage.goto();
     await loginPage.login(validUser.username, validUser.password);
     await expect(accountPage.page).toHaveURL(AccountPage.URL_PATTERN);
   }
 
   // ── Scenario 1 — Smoke ──────────────────────────────────────────────────────
-  test('Smoke: Account page shows correct title when logged in', async ({ loginPage, accountPage }) => {
+  test('@smoke Smoke: Account page shows correct title when logged in', async ({
+    loginPage,
+    accountPage,
+  }) => {
     await Given('I am logged in as a valid user', async () => {
       await loginAndGoToAccount(loginPage, accountPage);
     });
@@ -32,7 +37,10 @@ test.describe('Feature: FashionHub Account Page', () => {
   });
 
   // ── Scenario 2 — Welcome message ─────────────────────────────────────────────
-  test('Scenario: Welcome message includes the logged-in username', async ({ loginPage, accountPage }) => {
+  test('@regression Scenario: Welcome message includes the logged-in username', async ({
+    loginPage,
+    accountPage,
+  }) => {
     await Given('I am logged in as a valid user', async () => {
       await loginAndGoToAccount(loginPage, accountPage);
     });
@@ -49,7 +57,10 @@ test.describe('Feature: FashionHub Account Page', () => {
   });
 
   // ── Scenario 3 — Logout button visible ───────────────────────────────────────
-  test('Scenario: Logout button is visible when logged in', async ({ loginPage, accountPage }) => {
+  test('@regression Scenario: Logout button is visible when logged in', async ({
+    loginPage,
+    accountPage,
+  }) => {
     await Given('I am logged in as a valid user', async () => {
       await loginAndGoToAccount(loginPage, accountPage);
     });
@@ -61,7 +72,10 @@ test.describe('Feature: FashionHub Account Page', () => {
   });
 
   // ── Scenario 4 — Logout ────────────────────────────────────────────────────
-  test('Scenario: Clicking Logout redirects away from the account page', async ({ loginPage, accountPage }) => {
+  test('@regression Scenario: Clicking Logout redirects away from the account page', async ({
+    loginPage,
+    accountPage,
+  }) => {
     await Given('I am logged in as a valid user', async () => {
       await loginAndGoToAccount(loginPage, accountPage);
     });
@@ -76,7 +90,9 @@ test.describe('Feature: FashionHub Account Page', () => {
   });
 
   // ── Scenario 5 — Access control ──────────────────────────────────────────────
-  test('Scenario: Unauthenticated user sees no welcome message', async ({ accountPage }) => {
+  test('@regression Scenario: Unauthenticated user sees no welcome message', async ({
+    accountPage,
+  }) => {
     await Given('I am NOT logged in', async () => {
       await accountPage.navigate(AccountPage.PATH);
       await accountPage.page.waitForLoadState('domcontentloaded');

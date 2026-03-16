@@ -11,17 +11,39 @@
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
-    "lint": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\"",
     "test:bdd": "cucumber-js",
     "test:bdd:headed": "HEADED=true cucumber-js",
-    "test:bdd:login": "cucumber-js features/login.feature"
+    "test:bdd:login": "cucumber-js features/login.feature",
+    "lint:fix": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\"",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "test:allure": "playwright test --reporter=allure-playwright",
+    "report:allure": "allure generate allure-results --clean && allure open",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^12.7.0",
     "@cucumber/pretty-formatter": "^3.2.0",
     "@playwright/test": "^1.51.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "allure-playwright": "^3.6.0",
     "dotenv": "^16.4.7",
+    "eslint": "^10.0.3",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

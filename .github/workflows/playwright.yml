@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    # Nightly regression run against production at 02:00 UTC
     - cron: '0 2 * * *'
   workflow_dispatch:
     inputs:
@@ -15,17 +14,30 @@ on:
         required: false
         default: 'production'
       base_url:
-        description: 'Override BASE_URL directly (takes priority over environment)'
+        description: 'Override BASE_URL directly'
         required: false
 
 jobs:
+  # ── Sharded E2E tests (4 shards × 3 browsers = 12 parallel jobs) ───────────
   test:
-    name: Playwright — ${{ matrix.browser }}
+    name: Playwright — ${{ matrix.browser }} (${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
+        exclude:
+          # Firefox and WebKit skip performance tests, so 2 shards are enough
+          - browser: firefox
+            shardIndex: 3
+          - browser: firefox
+            shardIndex: 4
+          - browser: webkit
+            shardIndex: 3
+          - browser: webkit
+            shardIndex: 4
 
     steps:
       - name: Checkout repository
@@ -34,7 +46,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Install dependencies
@@ -43,26 +55,62 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps ${{ matrix.browser }}
 
-      - name: Run Playwright tests
+      - name: Run Playwright tests (shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
         env:
-          # BASE_URL wins if provided; falls back to TEST_ENV; falls back to default
           BASE_URL: ${{ inputs.base_url || vars.BASE_URL || '' }}
           TEST_ENV: ${{ inputs.environment || vars.TEST_ENV || 'production' }}
           CI: true
-        run: npx playwright test --project=${{ matrix.browser }}
+        run: >
+          npx playwright test
+          --project=${{ matrix.browser }}
+          --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
-      - name: Upload HTML report
+      - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-${{ matrix.browser }}
+          name: playwright-report-${{ matrix.browser }}-shard-${{ matrix.shardIndex }}
           path: playwright-report/
           retention-days: 14
 
-      - name: Upload test results (traces & screenshots)
+      - name: Upload test results (traces & screenshots on failure)
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results-${{ matrix.browser }}
+          name: test-results-${{ matrix.browser }}-shard-${{ matrix.shardIndex }}
           path: test-results/
+          retention-days: 7
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-${{ matrix.browser }}-shard-${{ matrix.shardIndex }}
+          path: allure-results/
+          retention-days: 14
+
+  # ── Smoke gate — runs only @smoke tagged tests on every PR (fast) ───────────
+  smoke:
+    name: Smoke Gate (chromium)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Run smoke tests
+        env:
+          TEST_ENV: production
+          CI: true
+        run: npx playwright test --project=chromium --grep @smoke
+      - name: Upload smoke report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-report
+          path: playwright-report/
           retention-days: 7
