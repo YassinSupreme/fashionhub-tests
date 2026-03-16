@@ -81,13 +81,6 @@ jobs:
           path: test-results/
           retention-days: 7
 
-      - name: Upload Allure results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results-${{ matrix.browser }}-shard-${{ matrix.shardIndex }}
-          path: allure-results/
-          retention-days: 14
 
   # ── Smoke gate — runs only @smoke tagged tests on every PR (fast) ───────────
   smoke:

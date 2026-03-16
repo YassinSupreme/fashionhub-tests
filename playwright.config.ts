@@ -21,12 +21,7 @@ export default defineConfig({
   // Run global-setup once before the suite: logs in and saves storageState.
   globalSetup: './playwright/global-setup.ts',
 
-  reporter: [
-    ['html', { outputFolder: 'playwright-report', open: 'never' }],
-    ['list'],
-    // Allure: run `npm run report:allure` to view the rich dashboard
-    ['allure-playwright', { outputFolder: 'allure-results' }],
-  ],
+  reporter: [['html', { outputFolder: 'playwright-report', open: 'never' }], ['list']],
 
   use: {
     baseURL,
