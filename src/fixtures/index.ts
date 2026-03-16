@@ -5,7 +5,6 @@ import { HomePage } from '../pages/HomePage';
 import { ProductsPage } from '../pages/ProductsPage';
 import { CartPage } from '../pages/CartPage';
 import { AboutPage } from '../pages/AboutPage';
-import { FashionHubApiClient } from '../api/FashionHubApiClient';
 
 /**
  * Extended test fixtures.
