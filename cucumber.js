@@ -1,7 +1,7 @@
 module.exports = {
   default: {
-    paths:       ['features/**/*.feature'],
-    require:     ['features/support/**/*.ts', 'features/step_definitions/**/*.ts'],
+    paths:       ['tests/**/*.feature'],
+    require:     ['tests/bdd/support/**/*.ts', 'tests/bdd/step_definitions/**/*.ts'],
     requireModule: ['ts-node/register'],
     format: [
       '@cucumber/pretty-formatter',

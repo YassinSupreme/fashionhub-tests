@@ -4,59 +4,6 @@
     "elements": [
       {
         "description": "",
-        "id": "fashionhub-about-page;main-heading-is-visible",
-        "keyword": "Scenario",
-        "line": 13,
-        "name": "Main heading is visible",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 939043708
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 8,
-            "name": "I am on the About page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:24"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 139806958
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 14,
-            "name": "I see the heading \"About FashionHub\"",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:206"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 49732083
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 17285707
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
         "id": "fashionhub-about-page;smoke-—-about-page-loads-with-correct-title",
         "keyword": "Scenario",
         "line": 10,
@@ -67,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 938946333
+              "duration": 1068117500
             }
           },
           {
@@ -76,11 +23,11 @@
             "line": 8,
             "name": "I am on the About page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:24"
+              "location": "tests/bdd/step_definitions/common.steps.ts:24"
             },
             "result": {
               "status": "passed",
-              "duration": 140610791
+              "duration": 167669958
             }
           },
           {
@@ -89,11 +36,11 @@
             "line": 11,
             "name": "the page title contains \"About\"",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:48"
+              "location": "tests/bdd/step_definitions/common.steps.ts:48"
             },
             "result": {
               "status": "passed",
-              "duration": 41574458
+              "duration": 24616708
             }
           },
           {
@@ -101,7 +48,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 19015582
+              "duration": 18132125
             }
           }
         ],
@@ -110,17 +57,17 @@
       },
       {
         "description": "",
-        "id": "fashionhub-about-page;all-expected-subsections-are-present",
+        "id": "fashionhub-about-page;main-heading-is-visible",
         "keyword": "Scenario",
-        "line": 16,
-        "name": "All expected subsections are present",
+        "line": 13,
+        "name": "Main heading is visible",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 165365250
+              "duration": 1062424624
             }
           },
           {
@@ -129,24 +76,24 @@
             "line": 8,
             "name": "I am on the About page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:24"
+              "location": "tests/bdd/step_definitions/common.steps.ts:24"
             },
             "result": {
               "status": "passed",
-              "duration": 84731249
+              "duration": 261450041
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 17,
-            "name": "the page contains subsection headings",
+            "line": 14,
+            "name": "I see the heading \"About FashionHub\"",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:211"
+              "location": "tests/bdd/step_definitions/common.steps.ts:206"
             },
             "result": {
               "status": "passed",
-              "duration": 18393208
+              "duration": 24332124
             }
           },
           {
@@ -154,7 +101,113 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 15306625
+              "duration": 24033082
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-about-page;key-subsection-headings-are-present-on-the-about-page",
+        "keyword": "Scenario Outline",
+        "line": 21,
+        "name": "Key subsection headings are present on the About page",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 127760999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the About page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 86381957
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "the about page contains the subsection \"Our Story\"",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:243"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 105875708
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 18776749
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-about-page;key-subsection-headings-are-present-on-the-about-page",
+        "keyword": "Scenario Outline",
+        "line": 22,
+        "name": "Key subsection headings are present on the About page",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 293865916
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the About page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 125748084
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "the about page contains the subsection \"Our Vision\"",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:243"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25449583
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 17342167
             }
           }
         ],
@@ -165,7 +218,7 @@
         "description": "",
         "id": "fashionhub-about-page;page-contains-descriptive-content-paragraphs",
         "keyword": "Scenario",
-        "line": 19,
+        "line": 24,
         "name": "Page contains descriptive content paragraphs",
         "steps": [
           {
@@ -173,7 +226,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 159970041
+              "duration": 134699665
             }
           },
           {
@@ -182,24 +235,24 @@
             "line": 8,
             "name": "I am on the About page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:24"
+              "location": "tests/bdd/step_definitions/common.steps.ts:24"
             },
             "result": {
               "status": "passed",
-              "duration": 150500916
+              "duration": 91094583
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 20,
+            "line": 25,
             "name": "the about section has descriptive content",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:216"
+              "location": "tests/bdd/step_definitions/common.steps.ts:216"
             },
             "result": {
               "status": "passed",
-              "duration": 12188499
+              "duration": 11851666
             }
           },
           {
@@ -207,7 +260,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 13375875
+              "duration": 10156750
             }
           }
         ],
@@ -220,7 +273,7 @@
     "keyword": "Feature",
     "name": "FashionHub About Page",
     "tags": [],
-    "uri": "features/about.feature"
+    "uri": "tests/about/about.feature"
   },
   {
     "description": "  As a registered user\n  I want to access my account page\n  So that I can view my details and manage my session",
@@ -237,7 +290,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 140241749
+              "duration": 125375415
             }
           },
           {
@@ -246,11 +299,11 @@
             "line": 8,
             "name": "I am logged in as a valid user",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:40"
+              "location": "tests/bdd/step_definitions/common.steps.ts:40"
             },
             "result": {
               "status": "passed",
-              "duration": 242877042
+              "duration": 313150000
             }
           },
           {
@@ -259,11 +312,11 @@
             "line": 9,
             "name": "I see a welcome message with my username",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:79"
+              "location": "tests/bdd/step_definitions/common.steps.ts:79"
             },
             "result": {
               "status": "passed",
-              "duration": 9592541
+              "duration": 9605332
             }
           },
           {
@@ -271,7 +324,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 14421624
+              "duration": 14916165
             }
           }
         ],
@@ -290,7 +343,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 138573374
+              "duration": 144163292
             }
           },
           {
@@ -299,11 +352,11 @@
             "line": 12,
             "name": "I am logged in as a valid user",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:40"
+              "location": "tests/bdd/step_definitions/common.steps.ts:40"
             },
             "result": {
               "status": "passed",
-              "duration": 220304500
+              "duration": 232502583
             }
           },
           {
@@ -312,11 +365,11 @@
             "line": 13,
             "name": "the Logout button is visible",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:223"
+              "location": "tests/bdd/step_definitions/common.steps.ts:223"
             },
             "result": {
               "status": "passed",
-              "duration": 7269708
+              "duration": 7484958
             }
           },
           {
@@ -324,7 +377,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 13964124
+              "duration": 16015041
             }
           }
         ],
@@ -343,7 +396,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 134822666
+              "duration": 149518958
             }
           },
           {
@@ -352,11 +405,11 @@
             "line": 16,
             "name": "I am logged in as a valid user",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:40"
+              "location": "tests/bdd/step_definitions/common.steps.ts:40"
             },
             "result": {
               "status": "passed",
-              "duration": 217109208
+              "duration": 306151875
             }
           },
           {
@@ -365,11 +418,11 @@
             "line": 17,
             "name": "I click the Logout button",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:228"
+              "location": "tests/bdd/step_definitions/common.steps.ts:228"
             },
             "result": {
               "status": "passed",
-              "duration": 38778583
+              "duration": 46712166
             }
           },
           {
@@ -378,11 +431,11 @@
             "line": 18,
             "name": "I am no longer on the Account page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:233"
+              "location": "tests/bdd/step_definitions/common.steps.ts:233"
             },
             "result": {
               "status": "passed",
-              "duration": 5741833
+              "duration": 11737000
             }
           },
           {
@@ -390,7 +443,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 15589917
+              "duration": 14681999
             }
           }
         ],
@@ -409,7 +462,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 150360291
+              "duration": 143292791
             }
           },
           {
@@ -418,11 +471,11 @@
             "line": 21,
             "name": "I am on the Account page without logging in",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:32"
+              "location": "tests/bdd/step_definitions/common.steps.ts:32"
             },
             "result": {
               "status": "passed",
-              "duration": 178873707
+              "duration": 118773124
             }
           },
           {
@@ -431,11 +484,11 @@
             "line": 22,
             "name": "I do not see a welcome message",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:84"
+              "location": "tests/bdd/step_definitions/common.steps.ts:84"
             },
             "result": {
               "status": "passed",
-              "duration": 10856915
+              "duration": 11278125
             }
           },
           {
@@ -443,7 +496,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 13603708
+              "duration": 20361707
             }
           }
         ],
@@ -456,741 +509,7 @@
     "keyword": "Feature",
     "name": "FashionHub Account Page",
     "tags": [],
-    "uri": "features/account.feature"
-  },
-  {
-    "description": "  As a shopper\n  I want to manage my shopping cart\n  So that I can review and purchase my items",
-    "elements": [
-      {
-        "description": "",
-        "id": "fashionhub-shopping-cart;empty-cart-is-handled-gracefully",
-        "keyword": "Scenario",
-        "line": 7,
-        "name": "Empty cart is handled gracefully",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 156542791
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 8,
-            "name": "I am on the Cart page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:20"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 122758166
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 9,
-            "name": "the cart page loads without errors",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:166"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 25351083
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 15557999
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "fashionhub-shopping-cart;adding-a-product-shows-it-in-the-cart",
-        "keyword": "Scenario",
-        "line": 11,
-        "name": "Adding a product shows it in the cart",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 142597499
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 12,
-            "name": "I am on the Products page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:16"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 212800458
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "When ",
-            "line": 13,
-            "name": "I add the first product to the cart",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:153"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 62206250
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 14,
-            "name": "I navigate to the Cart page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:36"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 60811083
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 15,
-            "name": "the cart contains at least one item",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:170"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 160764000
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 21206416
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "fashionhub-shopping-cart;cart-shows-correct-total-after-adding-a-product",
-        "keyword": "Scenario",
-        "line": 17,
-        "name": "Cart shows correct total after adding a product",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 127798208
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 18,
-            "name": "I am on the Products page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:16"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 268553084
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "When ",
-            "line": 19,
-            "name": "I add the first product to the cart",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:153"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 62225749
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 20,
-            "name": "I navigate to the Cart page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:36"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 79514541
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 21,
-            "name": "the cart total is greater than zero",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:175"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 34456500
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 20353207
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "fashionhub-shopping-cart;removing-an-item-decreases-the-cart-count",
-        "keyword": "Scenario",
-        "line": 23,
-        "name": "Removing an item decreases the cart count",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 189429250
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 24,
-            "name": "I am on the Products page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:16"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 275705541
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "When ",
-            "line": 25,
-            "name": "I add the first product to the cart",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:153"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 87175707
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 26,
-            "name": "I navigate to the Cart page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:36"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 35706833
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 27,
-            "name": "I remove the first cart item",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:180"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 391680999
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 28,
-            "name": "the cart item count decreases",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:187"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 5792249
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 15698209
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "fashionhub-shopping-cart;clicking-checkout-shows-a-confirmation-dialog",
-        "keyword": "Scenario",
-        "line": 30,
-        "name": "Clicking Checkout shows a confirmation dialog",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 280721875
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 31,
-            "name": "I am on the Products page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:16"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 278126208
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "When ",
-            "line": 32,
-            "name": "I add the first product to the cart",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:153"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 55290458
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 33,
-            "name": "I navigate to the Cart page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:36"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 51037792
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 34,
-            "name": "I click the Checkout button",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:192"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 590092833
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 35,
-            "name": "a confirmation dialog appears",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:196"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 653874
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 36,
-            "name": "I remain on the Cart page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:200"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 2029832
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 15736791
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      }
-    ],
-    "id": "fashionhub-shopping-cart",
-    "line": 1,
-    "keyword": "Feature",
-    "name": "FashionHub Shopping Cart",
-    "tags": [],
-    "uri": "features/cart.feature"
-  },
-  {
-    "description": "  As a visitor\n  I want to see the FashionHub home page\n  So that I can explore the shop",
-    "elements": [
-      {
-        "description": "",
-        "id": "fashionhub-home-page;smoke-—-home-page-loads-with-correct-title",
-        "keyword": "Scenario",
-        "line": 10,
-        "name": "Smoke — Home page loads with correct title",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 128228250
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 8,
-            "name": "I am on the Home page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:12"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 116331916
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 11,
-            "name": "the page title contains \"FashionHub\"",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:48"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 11227124
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 13808415
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "fashionhub-home-page;hero-section-is-visible-with-a-welcome-heading",
-        "keyword": "Scenario",
-        "line": 13,
-        "name": "Hero section is visible with a welcome heading",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 129638208
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 8,
-            "name": "I am on the Home page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:12"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 114374749
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 14,
-            "name": "the hero section is visible",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:96"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 12856249
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 15,
-            "name": "it contains a welcome heading",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:101"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 2199250
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 31705375
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "fashionhub-home-page;navigation-bar-contains-all-expected-links",
-        "keyword": "Scenario",
-        "line": 17,
-        "name": "Navigation bar contains all expected links",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 147264334
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 8,
-            "name": "I am on the Home page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:12"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 122970166
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 18,
-            "name": "the navigation bar contains a link to \"Clothing\"",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:106"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 11943541
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 19,
-            "name": "the navigation bar contains a link to \"About\"",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:106"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 1746541
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 14943666
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "fashionhub-home-page;feature-highlights-section-displays-three-items",
-        "keyword": "Scenario",
-        "line": 21,
-        "name": "Feature highlights section displays three items",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 132927208
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 8,
-            "name": "I am on the Home page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:12"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 88735292
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 22,
-            "name": "the feature section shows at least 3 highlight items",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:113"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 16868083
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 11481415
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "fashionhub-home-page;shop-now-button-navigates-to-the-products-page",
-        "keyword": "Scenario",
-        "line": 24,
-        "name": "Shop Now button navigates to the Products page",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 155670333
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 8,
-            "name": "I am on the Home page",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:12"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 130398000
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "When ",
-            "line": 25,
-            "name": "I click the \"Shop Now\" button",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:119"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 104664749
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 26,
-            "name": "the Products page is displayed",
-            "match": {
-              "location": "features/step_definitions/common.steps.ts:123"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 32846125
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 24496083
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      }
-    ],
-    "id": "fashionhub-home-page",
-    "line": 1,
-    "keyword": "Feature",
-    "name": "FashionHub Home Page",
-    "tags": [],
-    "uri": "features/home.feature"
+    "uri": "tests/account/account.feature"
   },
   {
     "description": "  As a registered user\n  I want to log in to FashionHub\n  So that I can access my account",
@@ -1207,7 +526,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 141082875
+              "duration": 132885166
             }
           },
           {
@@ -1216,11 +535,11 @@
             "line": 8,
             "name": "I am on the Login page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:8"
+              "location": "tests/bdd/step_definitions/common.steps.ts:8"
             },
             "result": {
               "status": "passed",
-              "duration": 92535875
+              "duration": 352069916
             }
           },
           {
@@ -1229,11 +548,11 @@
             "line": 11,
             "name": "the login form is visible",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:89"
+              "location": "tests/bdd/step_definitions/common.steps.ts:89"
             },
             "result": {
               "status": "passed",
-              "duration": 11948333
+              "duration": 12144707
             }
           },
           {
@@ -1241,7 +560,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 15995208
+              "duration": 18724540
             }
           }
         ],
@@ -1260,7 +579,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 134508291
+              "duration": 138915290
             }
           },
           {
@@ -1269,11 +588,11 @@
             "line": 8,
             "name": "I am on the Login page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:8"
+              "location": "tests/bdd/step_definitions/common.steps.ts:8"
             },
             "result": {
               "status": "passed",
-              "duration": 123830542
+              "duration": 141820832
             }
           },
           {
@@ -1282,11 +601,11 @@
             "line": 14,
             "name": "I enter valid credentials",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:55"
+              "location": "tests/bdd/step_definitions/common.steps.ts:55"
             },
             "result": {
               "status": "passed",
-              "duration": 117463458
+              "duration": 130210208
             }
           },
           {
@@ -1295,11 +614,11 @@
             "line": 15,
             "name": "I am redirected to the Account page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:70"
+              "location": "tests/bdd/step_definitions/common.steps.ts:70"
             },
             "result": {
               "status": "passed",
-              "duration": 9189457
+              "duration": 9036333
             }
           },
           {
@@ -1308,11 +627,11 @@
             "line": 16,
             "name": "I see a welcome message with my username",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:79"
+              "location": "tests/bdd/step_definitions/common.steps.ts:79"
             },
             "result": {
               "status": "passed",
-              "duration": 20561374
+              "duration": 7649750
             }
           },
           {
@@ -1320,7 +639,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24797959
+              "duration": 76432124
             }
           }
         ],
@@ -1329,17 +648,17 @@
       },
       {
         "description": "",
-        "id": "fashionhub-login;wrong-password-stays-on-login-page",
-        "keyword": "Scenario",
-        "line": 18,
-        "name": "Wrong password stays on login page",
+        "id": "fashionhub-login;invalid-credentials-keep-the-user-on-the-login-page",
+        "keyword": "Scenario Outline",
+        "line": 24,
+        "name": "Invalid credentials keep the user on the login page",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 127322250
+              "duration": 232297290
             }
           },
           {
@@ -1348,11 +667,11 @@
             "line": 8,
             "name": "I am on the Login page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:8"
+              "location": "tests/bdd/step_definitions/common.steps.ts:8"
             },
             "result": {
               "status": "passed",
-              "duration": 102702624
+              "duration": 178457250
             }
           },
           {
@@ -1361,11 +680,11 @@
             "line": 19,
             "name": "I enter username \"demouser\" and password \"wrongpassword\"",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:60"
+              "location": "tests/bdd/step_definitions/common.steps.ts:60"
             },
             "result": {
               "status": "passed",
-              "duration": 106215791
+              "duration": 156119416
             }
           },
           {
@@ -1374,11 +693,11 @@
             "line": 20,
             "name": "I remain on the Login page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:74"
+              "location": "tests/bdd/step_definitions/common.steps.ts:74"
             },
             "result": {
               "status": "passed",
-              "duration": 1015302625
+              "duration": 1016230749
             }
           },
           {
@@ -1386,7 +705,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 19392082
+              "duration": 32113583
             }
           }
         ],
@@ -1395,17 +714,17 @@
       },
       {
         "description": "",
-        "id": "fashionhub-login;wrong-username-stays-on-login-page",
-        "keyword": "Scenario",
-        "line": 22,
-        "name": "Wrong username stays on login page",
+        "id": "fashionhub-login;invalid-credentials-keep-the-user-on-the-login-page",
+        "keyword": "Scenario Outline",
+        "line": 25,
+        "name": "Invalid credentials keep the user on the login page",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 215971999
+              "duration": 274469125
             }
           },
           {
@@ -1414,37 +733,37 @@
             "line": 8,
             "name": "I am on the Login page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:8"
+              "location": "tests/bdd/step_definitions/common.steps.ts:8"
             },
             "result": {
               "status": "passed",
-              "duration": 89151750
+              "duration": 339789332
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 23,
+            "line": 19,
             "name": "I enter username \"nonexistentuser\" and password \"fashion123\"",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:60"
+              "location": "tests/bdd/step_definitions/common.steps.ts:60"
             },
             "result": {
               "status": "passed",
-              "duration": 77750332
+              "duration": 290306915
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 24,
+            "line": 20,
             "name": "I remain on the Login page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:74"
+              "location": "tests/bdd/step_definitions/common.steps.ts:74"
             },
             "result": {
               "status": "passed",
-              "duration": 1010546416
+              "duration": 1014226791
             }
           },
           {
@@ -1452,7 +771,139 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 46096540
+              "duration": 24791500
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-login;invalid-credentials-keep-the-user-on-the-login-page",
+        "keyword": "Scenario Outline",
+        "line": 26,
+        "name": "Invalid credentials keep the user on the login page",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 210096416
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the Login page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:8"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 135051083
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "I enter username \"demouser\" and password \"123\"",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:60"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 103788666
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "I remain on the Login page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1006672459
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 19118958
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-login;invalid-credentials-keep-the-user-on-the-login-page",
+        "keyword": "Scenario Outline",
+        "line": 27,
+        "name": "Invalid credentials keep the user on the login page",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 158649583
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the Login page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:8"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110383542
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "I enter username \"admin\" and password \"admin\"",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:60"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 87267374
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "I remain on the Login page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1004453375
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 13569499
             }
           }
         ],
@@ -1463,7 +914,7 @@
         "description": "",
         "id": "fashionhub-login;submitting-empty-credentials-stays-on-login-page",
         "keyword": "Scenario",
-        "line": 26,
+        "line": 29,
         "name": "Submitting empty credentials stays on login page",
         "steps": [
           {
@@ -1471,7 +922,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 165237125
+              "duration": 337954416
             }
           },
           {
@@ -1480,37 +931,37 @@
             "line": 8,
             "name": "I am on the Login page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:8"
+              "location": "tests/bdd/step_definitions/common.steps.ts:8"
             },
             "result": {
               "status": "passed",
-              "duration": 98159083
+              "duration": 98787958
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 27,
+            "line": 30,
             "name": "I click the Login button without entering credentials",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:66"
+              "location": "tests/bdd/step_definitions/common.steps.ts:66"
             },
             "result": {
               "status": "passed",
-              "duration": 62116874
+              "duration": 81792458
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 28,
+            "line": 31,
             "name": "I remain on the Login page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:74"
+              "location": "tests/bdd/step_definitions/common.steps.ts:74"
             },
             "result": {
               "status": "passed",
-              "duration": 1008760749
+              "duration": 1009831332
             }
           },
           {
@@ -1518,7 +969,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22130749
+              "duration": 25678917
             }
           }
         ],
@@ -1531,7 +982,741 @@
     "keyword": "Feature",
     "name": "FashionHub Login",
     "tags": [],
-    "uri": "features/login.feature"
+    "uri": "tests/auth/login.feature"
+  },
+  {
+    "description": "  As a shopper\n  I want to manage my shopping cart\n  So that I can review and purchase my items",
+    "elements": [
+      {
+        "description": "",
+        "id": "fashionhub-shopping-cart;empty-cart-is-handled-gracefully",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Empty cart is handled gracefully",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 258379584
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the Cart page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 135859207
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "the cart page loads without errors",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:166"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15331457
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 11045707
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-shopping-cart;adding-a-product-shows-it-in-the-cart",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "Adding a product shows it in the cart",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 139957458
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 12,
+            "name": "I am on the Products page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 635300542
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 13,
+            "name": "I add the first product to the cart",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:153"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 80512500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "I navigate to the Cart page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 84236499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 15,
+            "name": "the cart contains at least one item",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:170"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 23825458
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 31856040
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-shopping-cart;cart-shows-correct-total-after-adding-a-product",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Cart shows correct total after adding a product",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 200334333
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 18,
+            "name": "I am on the Products page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 238122166
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "I add the first product to the cart",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:153"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 66282332
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "I navigate to the Cart page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 37492917
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "the cart total is greater than zero",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:175"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 43190624
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 15814249
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-shopping-cart;removing-an-item-decreases-the-cart-count",
+        "keyword": "Scenario",
+        "line": 23,
+        "name": "Removing an item decreases the cart count",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 153049000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 24,
+            "name": "I am on the Products page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 310922207
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "I add the first product to the cart",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:153"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 63653416
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 26,
+            "name": "I navigate to the Cart page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 52314875
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "I remove the first cart item",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:180"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 565737790
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 28,
+            "name": "the cart item count decreases",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:187"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4940791
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 38243999
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-shopping-cart;clicking-checkout-shows-a-confirmation-dialog",
+        "keyword": "Scenario",
+        "line": 30,
+        "name": "Clicking Checkout shows a confirmation dialog",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 151274750
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 31,
+            "name": "I am on the Products page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 340171041
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 32,
+            "name": "I add the first product to the cart",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:153"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 107282999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 33,
+            "name": "I navigate to the Cart page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 326649999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "I click the Checkout button",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:192"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 562782541
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 35,
+            "name": "a confirmation dialog appears",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:196"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 759208
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 36,
+            "name": "I remain on the Cart page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:200"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2064166
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 13495207
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "fashionhub-shopping-cart",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "FashionHub Shopping Cart",
+    "tags": [],
+    "uri": "tests/cart/cart.feature"
+  },
+  {
+    "description": "  As a visitor\n  I want to see the FashionHub home page\n  So that I can explore the shop",
+    "elements": [
+      {
+        "description": "",
+        "id": "fashionhub-home-page;smoke-—-home-page-loads-with-correct-title",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Smoke — Home page loads with correct title",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 191497374
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the Home page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 137777082
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "the page title contains \"FashionHub\"",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:48"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12325541
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 17701999
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-home-page;hero-section-is-visible-with-a-welcome-heading",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "Hero section is visible with a welcome heading",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 193492374
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the Home page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 105853166
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "the hero section is visible",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13423458
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "it contains a welcome heading",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3455041
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 13497124
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-home-page;navigation-bar-contains-all-expected-links",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Navigation bar contains all expected links",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 146119500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the Home page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 116699667
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "the navigation bar contains a link to \"Clothing\"",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:106"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13615207
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "the navigation bar contains a link to \"About\"",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:106"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1285041
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14760582
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-home-page;feature-highlights-section-displays-three-items",
+        "keyword": "Scenario",
+        "line": 21,
+        "name": "Feature highlights section displays three items",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 152556458
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the Home page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 84830374
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "the feature section shows at least 3 highlight items",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:113"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11826666
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 13173333
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-home-page;shop-now-button-navigates-to-the-products-page",
+        "keyword": "Scenario",
+        "line": 24,
+        "name": "Shop Now button navigates to the Products page",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 147759500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the Home page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 118447874
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "I click the \"Shop Now\" button",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:119"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 156700165
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "the Products page is displayed",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:123"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6370332
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14668083
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "fashionhub-home-page",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "FashionHub Home Page",
+    "tags": [],
+    "uri": "tests/home/home.feature"
   },
   {
     "description": "  As a shopper\n  I want to browse the product catalogue\n  So that I can find items to buy",
@@ -1548,7 +1733,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 158464457
+              "duration": 136856958
             }
           },
           {
@@ -1557,11 +1742,11 @@
             "line": 8,
             "name": "I am on the Products page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:16"
+              "location": "tests/bdd/step_definitions/common.steps.ts:16"
             },
             "result": {
               "status": "passed",
-              "duration": 279871584
+              "duration": 290993542
             }
           },
           {
@@ -1570,11 +1755,11 @@
             "line": 11,
             "name": "the page title contains \"Products\"",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:48"
+              "location": "tests/bdd/step_definitions/common.steps.ts:48"
             },
             "result": {
               "status": "passed",
-              "duration": 12009958
+              "duration": 11238042
             }
           },
           {
@@ -1582,7 +1767,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 11944374
+              "duration": 16501416
             }
           }
         ],
@@ -1601,7 +1786,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 149410624
+              "duration": 151366374
             }
           },
           {
@@ -1610,11 +1795,11 @@
             "line": 8,
             "name": "I am on the Products page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:16"
+              "location": "tests/bdd/step_definitions/common.steps.ts:16"
             },
             "result": {
               "status": "passed",
-              "duration": 285298042
+              "duration": 232839583
             }
           },
           {
@@ -1623,11 +1808,11 @@
             "line": 14,
             "name": "at least one product card is visible",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:129"
+              "location": "tests/bdd/step_definitions/common.steps.ts:129"
             },
             "result": {
               "status": "passed",
-              "duration": 10101708
+              "duration": 18992250
             }
           },
           {
@@ -1635,7 +1820,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 12740041
+              "duration": 19201415
             }
           }
         ],
@@ -1654,7 +1839,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 128305624
+              "duration": 223273416
             }
           },
           {
@@ -1663,11 +1848,11 @@
             "line": 8,
             "name": "I am on the Products page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:16"
+              "location": "tests/bdd/step_definitions/common.steps.ts:16"
             },
             "result": {
               "status": "passed",
-              "duration": 213736791
+              "duration": 275630499
             }
           },
           {
@@ -1676,11 +1861,11 @@
             "line": 17,
             "name": "each visible product card has a name",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:134"
+              "location": "tests/bdd/step_definitions/common.steps.ts:134"
             },
             "result": {
               "status": "passed",
-              "duration": 11094250
+              "duration": 25093832
             }
           },
           {
@@ -1689,11 +1874,11 @@
             "line": 18,
             "name": "each visible product card has a price",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:140"
+              "location": "tests/bdd/step_definitions/common.steps.ts:140"
             },
             "result": {
               "status": "passed",
-              "duration": 11139166
+              "duration": 17554749
             }
           },
           {
@@ -1701,7 +1886,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 15335917
+              "duration": 22644374
             }
           }
         ],
@@ -1710,17 +1895,17 @@
       },
       {
         "description": "",
-        "id": "fashionhub-products-page;product-prices-are-formatted-as-currency",
-        "keyword": "Scenario",
-        "line": 20,
-        "name": "Product prices are formatted as currency",
+        "id": "fashionhub-products-page;each-product-price-is-formatted-as-currency",
+        "keyword": "Scenario Outline",
+        "line": 25,
+        "name": "Each product price is formatted as currency",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 153016249
+              "duration": 181946459
             }
           },
           {
@@ -1729,24 +1914,24 @@
             "line": 8,
             "name": "I am on the Products page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:16"
+              "location": "tests/bdd/step_definitions/common.steps.ts:16"
             },
             "result": {
               "status": "passed",
-              "duration": 299820832
+              "duration": 280319332
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 21,
-            "name": "all product prices match the currency format \"$X.XX\"",
+            "name": "the price of product \"Peacock Coat\" matches the currency format",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:145"
+              "location": "tests/bdd/step_definitions/common.steps.ts:237"
             },
             "result": {
               "status": "passed",
-              "duration": 29597749
+              "duration": 12912249
             }
           },
           {
@@ -1754,7 +1939,113 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 16612042
+              "duration": 31435124
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-products-page;each-product-price-is-formatted-as-currency",
+        "keyword": "Scenario Outline",
+        "line": 26,
+        "name": "Each product price is formatted as currency",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 171767166
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the Products page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 242199666
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "the price of product \"Casual Coat\" matches the currency format",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:237"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25090625
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30917457
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "fashionhub-products-page;each-product-price-is-formatted-as-currency",
+        "keyword": "Scenario Outline",
+        "line": 27,
+        "name": "Each product price is formatted as currency",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 147392292
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the Products page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 643452874
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "the price of product \"Puffer Jacket\" matches the currency format",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:237"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15235291
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 20735584
             }
           }
         ],
@@ -1765,7 +2056,7 @@
         "description": "",
         "id": "fashionhub-products-page;adding-a-product-updates-the-cart",
         "keyword": "Scenario",
-        "line": 23,
+        "line": 29,
         "name": "Adding a product updates the cart",
         "steps": [
           {
@@ -1773,7 +2064,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 124067165
+              "duration": 168316334
             }
           },
           {
@@ -1782,37 +2073,37 @@
             "line": 8,
             "name": "I am on the Products page",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:16"
+              "location": "tests/bdd/step_definitions/common.steps.ts:16"
             },
             "result": {
               "status": "passed",
-              "duration": 235715000
+              "duration": 273924292
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 24,
+            "line": 30,
             "name": "I add the first product to the cart",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:153"
+              "location": "tests/bdd/step_definitions/common.steps.ts:153"
             },
             "result": {
               "status": "passed",
-              "duration": 55397542
+              "duration": 64974582
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 25,
+            "line": 31,
             "name": "the cart reflects the added item",
             "match": {
-              "location": "features/step_definitions/common.steps.ts:158"
+              "location": "tests/bdd/step_definitions/common.steps.ts:158"
             },
             "result": {
               "status": "passed",
-              "duration": 37490125
+              "duration": 94820999
             }
           },
           {
@@ -1820,7 +2111,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 11387542
+              "duration": 18874957
             }
           }
         ],
@@ -1833,6 +2124,6 @@
     "keyword": "Feature",
     "name": "FashionHub Products Page",
     "tags": [],
-    "uri": "features/products.feature"
+    "uri": "tests/products/products.feature"
   }
 ]
