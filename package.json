@@ -23,7 +23,9 @@
     "prepare": "husky",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
-    "test:unit:coverage": "vitest run --coverage"
+    "test:unit:coverage": "vitest run --coverage",
+    "test:bdd:smoke": "cucumber-js --tags \"@smoke\"",
+    "test:bdd:regression": "cucumber-js --tags \"@regression\""
   },
   "devDependencies": {
     "@cucumber/cucumber": "^12.7.0",

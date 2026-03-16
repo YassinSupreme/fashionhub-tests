@@ -7,14 +7,17 @@ Feature: FashionHub Login
   Background:
     Given I am on the Login page
 
+  @smoke
   Scenario: Smoke — Login page loads with a visible form
     Then the login form is visible
 
+  @smoke
   Scenario: Valid login redirects to account page
     When I enter valid credentials
     Then I am redirected to the Account page
     And I see a welcome message with my username
 
+  @regression
   Scenario Outline: Invalid credentials keep the user on the login page
     When I enter username "<username>" and password "<password>"
     Then I remain on the Login page

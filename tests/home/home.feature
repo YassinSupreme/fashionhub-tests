@@ -7,6 +7,7 @@ Feature: FashionHub Home Page
   Background:
     Given I am on the Home page
 
+  @smoke
   Scenario: Smoke — Home page loads with correct title
     Then the page title contains "FashionHub"
 
@@ -14,6 +15,7 @@ Feature: FashionHub Home Page
     Then the hero section is visible
     And it contains a welcome heading
 
+  @regression
   Scenario: Navigation bar contains all expected links
     Then the navigation bar contains a link to "Clothing"
     And the navigation bar contains a link to "About"

@@ -8,6 +8,7 @@ Feature: FashionHub Shopping Cart
     Given I am on the Cart page
     Then the cart page loads without errors
 
+  @regression
   Scenario: Adding a product shows it in the cart
     Given I am on the Products page
     When I add the first product to the cart
@@ -20,6 +21,7 @@ Feature: FashionHub Shopping Cart
     And I navigate to the Cart page
     Then the cart total is greater than zero
 
+  @regression
   Scenario: Removing an item decreases the cart count
     Given I am on the Products page
     When I add the first product to the cart
