@@ -9,3 +9,6 @@ test-results/
 
 # Playwright auth state (contains session tokens)
 playwright/.auth/user.json
+
+# Allure results (generated, not tracked)
+allure-results/
