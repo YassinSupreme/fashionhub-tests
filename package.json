@@ -11,14 +11,11 @@
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
-    "lint": "tsc --noEmit",
-    "test:unit": "vitest run",
-    "test:unit:watch": "vitest"
+    "lint": "tsc --noEmit"
   },
   "devDependencies": {
     "@playwright/test": "^1.51.0",
     "dotenv": "^16.4.7",
-    "typescript": "^5.4.5",
-    "vitest": "^4.1.0"
+    "typescript": "^5.4.5"
   }
 }
