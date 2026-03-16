@@ -1,7 +1,7 @@
 {
   "name": "fashionhub-tests",
   "version": "1.0.0",
-  "description": "Playwright E2E test suite for FashionHub — cross-browser, multi-environment",
+  "description": "Playwright E2E test suite for FashionHub \u2014 cross-browser, multi-environment",
   "private": true,
   "scripts": {
     "test": "playwright test",
@@ -22,7 +22,10 @@
     "test:regression": "playwright test --grep @regression",
     "test:allure": "playwright test --reporter=allure-playwright",
     "report:allure": "allure generate allure-results --clean && allure open",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:unit:coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^12.7.0",
@@ -38,7 +41,8 @@
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^4.1.0"
   },
   "lint-staged": {
     "*.ts": [
