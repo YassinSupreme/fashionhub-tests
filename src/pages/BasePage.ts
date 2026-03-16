@@ -14,10 +14,20 @@ export abstract class BasePage {
   }
 
   /**
-   * Navigate to a page-relative path (resolved against baseURL from config).
+   * Navigate to a page-relative path with automatic retry on network error.
+   * Retries up to 2 times to handle transient GitHub Pages timeouts.
    */
-  async navigate(path: string): Promise<void> {
-    await this.page.goto(path);
+  async navigate(path: string, retries = 2): Promise<void> {
+    for (let attempt = 1; attempt <= retries + 1; attempt++) {
+      try {
+        await this.page.goto(path, { timeout: 30_000 });
+        return;
+      } catch (err) {
+        if (attempt > retries) throw err;
+        // Brief pause before retrying to allow network to recover
+        await this.page.waitForTimeout(1_500);
+      }
+    }
   }
 
   /**
