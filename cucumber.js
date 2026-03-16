@@ -8,6 +8,8 @@ module.exports = {
       'json:reports/cucumber-report.json',
     ],
     formatOptions: { snippetInterface: 'async-await' },
-    parallel: 2,
+    // Run serially — Playwright already parallelises E2E; Cucumber parallel
+    // breaks ts-node module registration in worker processes.
+    parallel: 0,
   },
 };

@@ -9,6 +9,7 @@ const apiBaseURL = process.env.API_BASE_URL ?? '';
 
 export default defineConfig({
   testDir: './tests',
+  testMatch: ['**/{about,auth,cart,home,products,account,performance}/**/*.spec.ts'],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
 
