@@ -15,7 +15,7 @@ export class AccountPage extends BasePage {
   private readonly welcomeHeading: Locator;
   private readonly logoutButton: Locator;
 
-  static readonly PATH = '/account.html';
+  static readonly PATH = 'account.html';
   static readonly URL_PATTERN = /account\.html/;
 
   constructor(page: Page) {

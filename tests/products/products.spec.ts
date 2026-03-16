@@ -1,15 +1,15 @@
 import { test, expect } from '../../src/fixtures/index';
 import { Given, When, Then, And } from '../../src/utils/bdd';
 import { CartPage } from '../../src/pages/CartPage';
+import { PRODUCTS } from '../../src/factories';
 
 /**
  * Feature: Products Page
  *
- * Hooks strategy:
- *   beforeEach — navigates to the Products page.
- *   afterEach  — attaches a named failure screenshot.
+ * Parallelism: parallel — each test navigates independently, no shared state.
  */
 test.describe('Feature: FashionHub Products Page', () => {
+  test.describe.configure({ mode: 'parallel' });
 
   test.beforeEach(async ({ productsPage }) => {
     await productsPage.goto();
@@ -18,7 +18,7 @@ test.describe('Feature: FashionHub Products Page', () => {
   test.afterEach(async ({ productsPage }, testInfo) => {
     if (testInfo.status !== testInfo.expectedStatus) {
       await testInfo.attach(`${testInfo.title} — failure`, {
-        body: await productsPage.page.screenshot(),
+        body: await productsPage.screenshot(),
         contentType: 'image/png',
       });
     }
@@ -45,20 +45,20 @@ test.describe('Feature: FashionHub Products Page', () => {
     await Then('product names should be visible', async () => {
       const names = await productsPage.getProductNames();
       expect(names.length).toBeGreaterThan(0);
-      expect(names).toContain('Peacock Coat');
+      expect(names).toContain(PRODUCTS.coat.name);
     });
   });
 
   test('@regression Scenario: Product prices are formatted as currency (e.g. $49.99)', async ({ productsPage }) => {
-    await Then('the price of "Peacock Coat" should match the currency format', async () => {
-      const price = await productsPage.getProductPrice('Peacock Coat');
+    await Then(`the price of "${PRODUCTS.coat.name}" should match the currency format`, async () => {
+      const price = await productsPage.getProductPrice(PRODUCTS.coat.name);
       expect(price).toMatch(/^\$\d+\.\d{2}$/);
     });
   });
 
   test('@regression Scenario: Adding a product to the cart updates the cart', async ({ productsPage, page }) => {
-    await When('I click "Add to Cart" for "Peacock Coat"', async () => {
-      await productsPage.addProductToCart('Peacock Coat');
+    await When(`I click "Add to Cart" for "${PRODUCTS.coat.name}"`, async () => {
+      await productsPage.addProductToCart(PRODUCTS.coat.name);
     });
 
     await Then('the cart should contain the added item', async () => {

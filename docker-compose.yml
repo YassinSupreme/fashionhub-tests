@@ -1,19 +1,59 @@
+##
+# FashionHub — Full Local Stack
+# ==============================
+#
+# Starts two services:
+#   fashionhub-app     → The FashionHub demo site (Jekyll, port 4000)
+#   playwright-tests   → Playwright E2E test runner (depends on the app)
+#
+# Quick start:
+#   docker compose up --build          # Start app + run all tests
+#   docker compose up fashionhub-app   # Start app only (manual testing)
+#
+# Targets:
+#   TEST_ENV=local   → http://fashionhub-app:4000/fashionhub/  (in-compose networking)
+#   TEST_ENV=production → https://pocketaces2.github.io/fashionhub/ (default, no app needed)
+##
+
 version: '3.9'
 
 services:
+
+  # ── FashionHub Demo App ────────────────────────────────────────────────────
+  fashionhub-app:
+    build:
+      context: ./fashionhub-app
+      dockerfile: Dockerfile
+    ports:
+      # Expose on host for manual browser testing: http://localhost:4000/fashionhub/
+      - "4000:4000"
+    healthcheck:
+      # Wait until Jekyll has finished building and is serving the site
+      test: ["CMD", "curl", "-f", "http://localhost:4000/fashionhub/"]
+      interval: 10s
+      timeout: 5s
+      retries: 12        # up to ~2 minutes for first Jekyll build
+      start_period: 30s
+
+  # ── Playwright Test Runner ─────────────────────────────────────────────────
   playwright-tests:
     build:
       context: .
       dockerfile: Dockerfile
+    depends_on:
+      fashionhub-app:
+        condition: service_healthy  # Wait for Jekyll to finish building
     environment:
-      # Pass the target environment from the host shell.
-      # Priority: BASE_URL > TEST_ENV > default (production).
+      # Run against the local app container — no internet needed.
+      # Tests use http://fashionhub-app:4000/fashionhub/ (Docker internal DNS).
+      - TEST_ENV=${TEST_ENV:-local}
       - BASE_URL=${BASE_URL:-}
-      - TEST_ENV=${TEST_ENV:-production}
       - CI=true
+      - WORKERS=${WORKERS:-2}
     volumes:
       # Mount report output so it's accessible on the host after the run
       - ./playwright-report:/app/playwright-report
       - ./test-results:/app/test-results
-    # Override the default CMD to run a specific browser:
+    # Override the default CMD to run a specific browser or tag:
     #   docker compose run playwright-tests npx playwright test --project=chromium
+    #   docker compose run playwright-tests npx playwright test --grep @smoke

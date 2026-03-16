@@ -1,7 +1,7 @@
 {
   "name": "fashionhub-tests",
   "version": "1.0.0",
-  "description": "Playwright E2E test suite for FashionHub \u2014 cross-browser, multi-environment",
+  "description": "Playwright E2E test suite for FashionHub — cross-browser, multi-environment",
   "private": true,
   "scripts": {
     "test": "playwright test",
@@ -20,11 +20,14 @@
     "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\"",
     "test:smoke": "playwright test --grep @smoke",
     "test:regression": "playwright test --grep @regression",
-    "test:unit": "vitest run",
-    "test:unit:watch": "vitest",
-    "test:unit:coverage": "vitest run --coverage",
     "test:bdd:smoke": "cucumber-js --tags \"@smoke\"",
-    "test:bdd:regression": "cucumber-js --tags \"@regression\""
+    "test:bdd:regression": "cucumber-js --tags \"@regression\"",
+    "test:parallel": "playwright test --workers=4",
+    "test:shard:1": "playwright test --shard=1/4",
+    "test:shard:2": "playwright test --shard=2/4",
+    "test:shard:3": "playwright test --shard=3/4",
+    "test:shard:4": "playwright test --shard=4/4",
+    "test:merge-reports": "playwright merge-reports ./blob-report --reporter html"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^12.7.0",
@@ -37,7 +40,6 @@
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.8.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5",
-    "vitest": "^4.1.0"
+    "typescript": "^5.4.5"
   }
 }

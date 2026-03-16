@@ -1,20 +1,19 @@
 import { test, expect } from '../../src/fixtures/index';
 import { Given, When, Then, And } from '../../src/utils/bdd';
+import { PRODUCTS } from '../../src/factories';
 
 /**
  * Feature: Shopping Cart
  *
- * Hooks strategy:
- *   beforeEach — not used globally here as some tests start on Products page.
- *               Per-test Given steps handle navigation.
- *   afterEach  — attaches a failure screenshot with a descriptive name.
+ * Parallelism: serial — cart tests mutate shared localStorage state.
  */
 test.describe('Feature: FashionHub Shopping Cart', () => {
+  test.describe.configure({ mode: 'serial' });
 
   test.afterEach(async ({ cartPage }, testInfo) => {
     if (testInfo.status !== testInfo.expectedStatus) {
       await testInfo.attach(`${testInfo.title} — failure`, {
-        body: await cartPage.page.screenshot(),
+        body: await cartPage.screenshot(),
         contentType: 'image/png',
       });
     }
@@ -47,8 +46,8 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
       await productsPage.goto();
     });
 
-    await When('I add "Peacock Coat" to the cart', async () => {
-      await productsPage.addProductToCart('Peacock Coat');
+    await When(`I add "${PRODUCTS.coat.name}" to the cart`, async () => {
+      await productsPage.addProductToCart(PRODUCTS.coat.name);
     });
 
     await And('I navigate to the Cart page', async () => {
@@ -59,15 +58,15 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
       expect(await cartPage.getCartItemCount()).toBeGreaterThan(0);
     });
 
-    await And('"Peacock Coat" should appear in the cart item list', async () => {
-      expect(await cartPage.getCartItemNames()).toContain('Peacock Coat');
+    await And(`"${PRODUCTS.coat.name}" should appear in the cart item list`, async () => {
+      expect(await cartPage.getCartItemNames()).toContain(PRODUCTS.coat.name);
     });
   });
 
   test('@regression Scenario: Cart displays a total amount after adding a product', async ({ productsPage, cartPage }) => {
     await Given('a product has been added to the cart', async () => {
       await productsPage.goto();
-      await productsPage.addProductToCart('Peacock Coat');
+      await productsPage.addProductToCart(PRODUCTS.coat.name);
       await cartPage.goto();
     });
 
@@ -78,16 +77,16 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
   });
 
   test('@regression Scenario: Removing an item decreases the cart count', async ({ productsPage, cartPage }) => {
-    await Given('"Peacock Coat" is in the cart', async () => {
+    await Given(`"${PRODUCTS.coat.name}" is in the cart`, async () => {
       await productsPage.goto();
-      await productsPage.addProductToCart('Peacock Coat');
+      await productsPage.addProductToCart(PRODUCTS.coat.name);
       await cartPage.goto();
     });
 
     const countBefore = await cartPage.getCartItemCount();
 
-    await When('I click the remove button for "Peacock Coat"', async () => {
-      await cartPage.removeItem('Peacock Coat');
+    await When(`I click the remove button for "${PRODUCTS.coat.name}"`, async () => {
+      await cartPage.removeItem(PRODUCTS.coat.name);
     });
 
     await Then('the cart item count should decrease by one', async () => {
@@ -98,7 +97,7 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
   test('@regression Scenario: Checkout triggers a confirmation dialog and stays on cart', async ({ productsPage, cartPage }) => {
     await Given('at least one product is in the cart', async () => {
       await productsPage.goto();
-      await productsPage.addProductToCart('Peacock Coat');
+      await productsPage.addProductToCart(PRODUCTS.coat.name);
       await cartPage.goto();
       expect(await cartPage.getCartItemCount()).toBeGreaterThan(0);
     });

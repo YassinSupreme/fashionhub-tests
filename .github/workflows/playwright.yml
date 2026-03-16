@@ -16,6 +16,10 @@ on:
       base_url:
         description: 'Override BASE_URL directly'
         required: false
+      workers:
+        description: 'Number of parallel workers per shard (default: 2)'
+        required: false
+        default: '2'
 
 jobs:
   # ── Sharded E2E tests (4 shards × 3 browsers = 12 parallel jobs) ───────────
@@ -59,19 +63,20 @@ jobs:
         env:
           BASE_URL: ${{ inputs.base_url || vars.BASE_URL || '' }}
           TEST_ENV: ${{ inputs.environment || vars.TEST_ENV || 'production' }}
+          WORKERS: ${{ inputs.workers || '2' }}
           CI: true
         run: >
           npx playwright test
           --project=${{ matrix.browser }}
           --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
-      - name: Upload Playwright report
+      - name: Upload blob report (for merge job)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-${{ matrix.browser }}-shard-${{ matrix.shardIndex }}
-          path: playwright-report/
-          retention-days: 14
+          name: blob-report-${{ matrix.browser }}-shard-${{ matrix.shardIndex }}
+          path: blob-report/
+          retention-days: 1
 
       - name: Upload test results (traces & screenshots on failure)
         if: failure()
@@ -98,12 +103,47 @@ jobs:
       - name: Run smoke tests
         env:
           TEST_ENV: production
+          WORKERS: 4
           CI: true
         run: npx playwright test --project=chromium --grep @smoke
-      - name: Upload smoke report
+      - name: Upload smoke blob report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: smoke-report
+          name: blob-report-smoke
+          path: blob-report/
+          retention-days: 1
+
+
+  # ── Merge all shard reports into a single unified HTML report ───────────────
+  merge-reports:
+    name: Merge Reports
+    if: always()
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Download all blob reports
+        uses: actions/download-artifact@v4
+        with:
+          path: all-blob-reports
+          pattern: blob-report-*
+          merge-multiple: true
+
+      - name: Merge into unified HTML report
+        run: npx playwright merge-reports --reporter html ./all-blob-reports
+
+      - name: Upload unified HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-merged
           path: playwright-report/
-          retention-days: 7
+          retention-days: 14

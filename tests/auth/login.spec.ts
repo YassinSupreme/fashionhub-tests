@@ -6,20 +6,19 @@ import { AccountPage } from '../../src/pages/AccountPage';
 /**
  * Feature: Login (Authentication)
  *
- * Hooks strategy:
- *   beforeEach — navigates to the Login page for every scenario.
- *   afterEach  — attaches a named failure screenshot for easier debugging.
+ * Parallelism: parallel — each test performs its own fresh login; no shared state.
  */
 test.describe('Feature: FashionHub Login', () => {
+  test.describe.configure({ mode: 'parallel' });
 
-  test.beforeEach(async ({ loginPage }) => {
+  test.beforeEach(async ({ loginPage, page }) => {
     await loginPage.goto();
   });
 
   test.afterEach(async ({ loginPage }, testInfo) => {
     if (testInfo.status !== testInfo.expectedStatus) {
       await testInfo.attach(`${testInfo.title} — failure`, {
-        body: await loginPage.page.screenshot(),
+        body: await loginPage.screenshot(),
         contentType: 'image/png',
       });
     }
@@ -41,7 +40,7 @@ test.describe('Feature: FashionHub Login', () => {
     });
   });
 
-  test('@regression Scenario: Wrong password keeps user on the login page', async ({ loginPage }) => {
+  test('@regression Scenario: Wrong password keeps user on the login page', async ({ loginPage, page }) => {
     await When('I enter a correct username but wrong password', async () => {
       await loginPage.login(invalidUsers.wrongPassword.username, invalidUsers.wrongPassword.password);
     });
@@ -52,7 +51,7 @@ test.describe('Feature: FashionHub Login', () => {
     });
   });
 
-  test('@regression Scenario: Non-existent username keeps user on the login page', async ({ loginPage }) => {
+  test('@regression Scenario: Non-existent username keeps user on the login page', async ({ loginPage, page }) => {
     await When('I enter an unrecognised username', async () => {
       await loginPage.login(invalidUsers.wrongUsername.username, invalidUsers.wrongUsername.password);
     });
@@ -63,9 +62,9 @@ test.describe('Feature: FashionHub Login', () => {
     });
   });
 
-  test('@regression Scenario: Submitting empty credentials does not navigate away', async ({ loginPage }) => {
+  test('@regression Scenario: Submitting empty credentials does not navigate away', async ({ loginPage, page }) => {
     await When('I click the submit button without filling any field', async () => {
-      await loginPage.page.locator('input[type="submit"]').click();
+      await page.locator('input[type="submit"]').click();
     });
 
     await Then('I remain on the Login page', async () => {
@@ -74,7 +73,7 @@ test.describe('Feature: FashionHub Login', () => {
     });
   });
 
-  test('@smoke Smoke: Login page loads and displays the login form', async ({ loginPage }) => {
+  test('@smoke Smoke: Login page loads and displays the login form', async ({ loginPage, page }) => {
     await Then('the page should have a title', async () => {
       const title = await loginPage.getTitle();
       expect(title).toBeTruthy();

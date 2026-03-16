@@ -7,11 +7,25 @@
  *   2. TEST_ENV environment variable  (name-to-URL mapping)
  *   3. .env file values               (loaded by dotenv in playwright.config.ts)
  *   4. Default: production URL
+ *
+ * Environments:
+ *   local      → http://fashionhub-app:4000/fashionhub/
+ *                (Docker internal service name — used by playwright-tests
+ *                 container when running via docker compose)
+ *   production → https://pocketaces2.github.io/fashionhub/ (default)
+ *   staging    → https://staging-env/fashionhub/
+ *
+ * Running locally against Docker app (from host machine):
+ *   BASE_URL=http://localhost:4000/fashionhub/ npm test
+ * Running inside docker compose:
+ *   TEST_ENV=local (set automatically by docker-compose.yml)
  */
 
 export const ENVIRONMENTS: Record<string, string> = {
-  local: 'http://localhost:4000/fashionhub/',
-  staging: 'https://staging-env/fashionhub/',
+  // Used inside docker compose — Playwright container reaches the app
+  // via Docker's internal DNS using the service name 'fashionhub-app'.
+  local:      'http://fashionhub-app:4000/fashionhub/',
+  staging:    'https://staging-env/fashionhub/',
   production: 'https://pocketaces2.github.io/fashionhub/',
 };
 
