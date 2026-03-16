@@ -25,6 +25,13 @@ export class AccountPage extends BasePage {
     this.logoutButton = page.locator('logout-button button');
   }
 
+  // ── Navigation ───────────────────────────────────────────────────────────
+
+  async goto(): Promise<void> {
+    await this.navigate(AccountPage.PATH);
+    await this.page.waitForLoadState('domcontentloaded');
+  }
+
   // ── Queries ──────────────────────────────────────────────────────────────
 
   /**

@@ -11,11 +11,17 @@
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test:bdd": "cucumber-js",
+    "test:bdd:headed": "HEADED=true cucumber-js",
+    "test:bdd:login": "cucumber-js features/login.feature"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^12.7.0",
+    "@cucumber/pretty-formatter": "^3.2.0",
     "@playwright/test": "^1.51.0",
     "dotenv": "^16.4.7",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
 }
