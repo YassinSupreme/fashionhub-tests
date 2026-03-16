@@ -2,13 +2,24 @@ import { test, expect } from '../../src/fixtures/index';
 import { Given, When, Then, And } from '../../src/utils/bdd';
 
 /**
- * Feature: Shopping Cart Page
+ * Feature: Shopping Cart
  *
- * Tests the FashionHub cart page using Given / When / Then BDD style.
- * Linked feature file: tests/cart/cart.feature
+ * Hooks strategy:
+ *   beforeEach — not used globally here as some tests start on Products page.
+ *               Per-test Given steps handle navigation.
+ *   afterEach  — attaches a failure screenshot with a descriptive name.
  */
 test.describe('Feature: FashionHub Shopping Cart', () => {
-  // ── Scenario 1 — Smoke ──────────────────────────────────────────────────────
+
+  test.afterEach(async ({ cartPage }, testInfo) => {
+    if (testInfo.status !== testInfo.expectedStatus) {
+      await testInfo.attach(`${testInfo.title} — failure`, {
+        body: await cartPage.page.screenshot(),
+        contentType: 'image/png',
+      });
+    }
+  });
+
   test('@smoke Smoke: Cart page loads with the correct title', async ({ cartPage }) => {
     await Given('I navigate to the Cart page', async () => {
       await cartPage.goto();
@@ -20,10 +31,7 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
     });
   });
 
-  // ── Scenario 2 — Empty cart ───────────────────────────────────────────────────
-  test('@regression Scenario: Visiting an empty cart is gracefully handled', async ({
-    cartPage,
-  }) => {
+  test('@smoke Scenario: Visiting an empty cart is gracefully handled', async ({ cartPage }) => {
     await Given('I am on the Cart page with no items', async () => {
       await cartPage.goto();
     });
@@ -34,11 +42,7 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
     });
   });
 
-  // ── Scenario 3 — Item appears after Add to Cart ───────────────────────────────
-  test('@regression Scenario: Adding a product shows it in the cart', async ({
-    productsPage,
-    cartPage,
-  }) => {
+  test('@regression Scenario: Adding a product shows it in the cart', async ({ productsPage, cartPage }) => {
     await Given('I am on the Products page', async () => {
       await productsPage.goto();
     });
@@ -52,21 +56,15 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
     });
 
     await Then('the cart should contain at least one item', async () => {
-      const itemCount = await cartPage.getCartItemCount();
-      expect(itemCount).toBeGreaterThan(0);
+      expect(await cartPage.getCartItemCount()).toBeGreaterThan(0);
     });
 
     await And('"Peacock Coat" should appear in the cart item list', async () => {
-      const itemNames = await cartPage.getCartItemNames();
-      expect(itemNames).toContain('Peacock Coat');
+      expect(await cartPage.getCartItemNames()).toContain('Peacock Coat');
     });
   });
 
-  // ── Scenario 4 — Cart total ────────────────────────────────────────────────────
-  test('@regression Scenario: Cart displays a total amount after adding a product', async ({
-    productsPage,
-    cartPage,
-  }) => {
+  test('@regression Scenario: Cart displays a total amount after adding a product', async ({ productsPage, cartPage }) => {
     await Given('a product has been added to the cart', async () => {
       await productsPage.goto();
       await productsPage.addProductToCart('Peacock Coat');
@@ -79,11 +77,7 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
     });
   });
 
-  // ── Scenario 5 — Remove item ──────────────────────────────────────────────────
-  test('@regression Scenario: Removing an item decreases the cart count', async ({
-    productsPage,
-    cartPage,
-  }) => {
+  test('@regression Scenario: Removing an item decreases the cart count', async ({ productsPage, cartPage }) => {
     await Given('"Peacock Coat" is in the cart', async () => {
       await productsPage.goto();
       await productsPage.addProductToCart('Peacock Coat');
@@ -97,25 +91,16 @@ test.describe('Feature: FashionHub Shopping Cart', () => {
     });
 
     await Then('the cart item count should decrease by one', async () => {
-      const countAfter = await cartPage.getCartItemCount();
-      expect(countAfter).toBe(countBefore - 1);
+      expect(await cartPage.getCartItemCount()).toBe(countBefore - 1);
     });
   });
 
-  // ── Scenario 6 — Checkout ─────────────────────────────────────────────────────
-  test('@regression Scenario: Checkout triggers a confirmation dialog and stays on cart', async ({
-    productsPage,
-    cartPage,
-  }) => {
+  test('@regression Scenario: Checkout triggers a confirmation dialog and stays on cart', async ({ productsPage, cartPage }) => {
     await Given('at least one product is in the cart', async () => {
       await productsPage.goto();
       await productsPage.addProductToCart('Peacock Coat');
       await cartPage.goto();
       expect(await cartPage.getCartItemCount()).toBeGreaterThan(0);
-    });
-
-    await When('I click the Checkout button', async () => {
-      // clickCheckoutAndGetDialog auto-accepts the dialog and returns its message
     });
 
     await Then('a confirmation dialog should appear', async () => {

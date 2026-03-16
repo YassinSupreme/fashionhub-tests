@@ -3,82 +3,60 @@ import { Given, When, Then, And } from '../../src/utils/bdd';
 import { CartPage } from '../../src/pages/CartPage';
 
 /**
- * Feature: Products / Clothing Page
+ * Feature: Products Page
  *
- * Tests the FashionHub products page using Given / When / Then BDD style.
- * Linked feature file: tests/products/products.feature
+ * Hooks strategy:
+ *   beforeEach — navigates to the Products page.
+ *   afterEach  — attaches a named failure screenshot.
  */
 test.describe('Feature: FashionHub Products Page', () => {
-  // ── Scenario 1 — Smoke ──────────────────────────────────────────────────────
-  test('@smoke Smoke: Products page loads with the correct title', async ({ productsPage }) => {
-    await Given('I navigate to the Products page', async () => {
-      await productsPage.goto();
-    });
 
+  test.beforeEach(async ({ productsPage }) => {
+    await productsPage.goto();
+  });
+
+  test.afterEach(async ({ productsPage }, testInfo) => {
+    if (testInfo.status !== testInfo.expectedStatus) {
+      await testInfo.attach(`${testInfo.title} — failure`, {
+        body: await productsPage.page.screenshot(),
+        contentType: 'image/png',
+      });
+    }
+  });
+
+  test('@smoke Smoke: Products page loads with the correct title', async ({ productsPage }) => {
     await Then('the page title should be "Products - FashionHub"', async () => {
       const title = await productsPage.getTitle();
       expect(title).toBe('Products - FashionHub');
     });
   });
 
-  // ── Scenario 2 — Products visible ────────────────────────────────────────────
-  test('@regression Scenario: At least one product card is displayed', async ({ productsPage }) => {
-    await Given('I am on the Products page', async () => {
-      await productsPage.goto();
-    });
-
+  test('@smoke Scenario: At least one product card is displayed', async ({ productsPage }) => {
     await Then('at least one product card should be visible', async () => {
       expect(await productsPage.hasProducts()).toBe(true);
     });
 
     await And('the product count should be greater than zero', async () => {
-      const count = await productsPage.getProductCount();
-      expect(count).toBeGreaterThan(0);
+      expect(await productsPage.getProductCount()).toBeGreaterThan(0);
     });
   });
 
-  // ── Scenario 3 — Product card anatomy ────────────────────────────────────────
-  test('@regression Scenario: Each product card shows a name and a price', async ({
-    productsPage,
-  }) => {
-    await Given('I am on the Products page', async () => {
-      await productsPage.goto();
-    });
-
+  test('@regression Scenario: Each product card shows a name and a price', async ({ productsPage }) => {
     await Then('product names should be visible', async () => {
       const names = await productsPage.getProductNames();
       expect(names.length).toBeGreaterThan(0);
-    });
-
-    await And('the known product "Peacock Coat" should be listed', async () => {
-      const names = await productsPage.getProductNames();
       expect(names).toContain('Peacock Coat');
     });
   });
 
-  // ── Scenario 4 — Price format ─────────────────────────────────────────────────
-  test('@regression Scenario: Product prices are formatted as currency (e.g. $49.99)', async ({
-    productsPage,
-  }) => {
-    await Given('I am on the Products page', async () => {
-      await productsPage.goto();
-    });
-
+  test('@regression Scenario: Product prices are formatted as currency (e.g. $49.99)', async ({ productsPage }) => {
     await Then('the price of "Peacock Coat" should match the currency format', async () => {
       const price = await productsPage.getProductPrice('Peacock Coat');
       expect(price).toMatch(/^\$\d+\.\d{2}$/);
     });
   });
 
-  // ── Scenario 5 — Add to Cart ──────────────────────────────────────────────────
-  test('@regression Scenario: Adding a product to the cart updates the cart', async ({
-    productsPage,
-    page,
-  }) => {
-    await Given('I am on the Products page', async () => {
-      await productsPage.goto();
-    });
-
+  test('@regression Scenario: Adding a product to the cart updates the cart', async ({ productsPage, page }) => {
     await When('I click "Add to Cart" for "Peacock Coat"', async () => {
       await productsPage.addProductToCart('Peacock Coat');
     });

@@ -6,45 +6,37 @@ import { validUser } from '../../src/data/users';
 /**
  * Feature: Account Page
  *
- * Tests the FashionHub account page using Given / When / Then BDD style.
- * Linked feature file: tests/account/account.feature
+ * Hooks strategy:
+ *   beforeEach — logs in as the valid user before every test via the shared
+ *               loginAndGoToAccount helper, guaranteeing each test starts in
+ *               an authenticated state.
+ *   afterEach  — attaches a named failure screenshot.
  */
 test.describe('Feature: FashionHub Account Page', () => {
-  // ── Shared setup helper ────────────────────────────────────────────────────
-  /** Logs in with valid credentials and waits for the account page URL. */
-  async function loginAndGoToAccount(
-    loginPage: { goto: () => Promise<void>; login: (u: string, p: string) => Promise<void> },
-    accountPage: { page: import('@playwright/test').Page },
-  ) {
+
+  test.beforeEach(async ({ loginPage, accountPage }) => {
     await loginPage.goto();
     await loginPage.login(validUser.username, validUser.password);
     await expect(accountPage.page).toHaveURL(AccountPage.URL_PATTERN);
-  }
+  });
 
-  // ── Scenario 1 — Smoke ──────────────────────────────────────────────────────
-  test('@smoke Smoke: Account page shows correct title when logged in', async ({
-    loginPage,
-    accountPage,
-  }) => {
-    await Given('I am logged in as a valid user', async () => {
-      await loginAndGoToAccount(loginPage, accountPage);
-    });
+  test.afterEach(async ({ accountPage }, testInfo) => {
+    if (testInfo.status !== testInfo.expectedStatus) {
+      await testInfo.attach(`${testInfo.title} — failure`, {
+        body: await accountPage.page.screenshot(),
+        contentType: 'image/png',
+      });
+    }
+  });
 
+  test('@smoke Smoke: Account page shows correct title when logged in', async ({ accountPage }) => {
     await Then('the page title should be "My Account - FashionHub"', async () => {
       const title = await accountPage.getTitle();
       expect(title).toBe('My Account - FashionHub');
     });
   });
 
-  // ── Scenario 2 — Welcome message ─────────────────────────────────────────────
-  test('@regression Scenario: Welcome message includes the logged-in username', async ({
-    loginPage,
-    accountPage,
-  }) => {
-    await Given('I am logged in as a valid user', async () => {
-      await loginAndGoToAccount(loginPage, accountPage);
-    });
-
+  test('@smoke Scenario: Welcome message includes the logged-in username', async ({ accountPage }) => {
     await Then('the welcome message should contain my username', async () => {
       const message = await accountPage.getWelcomeMessage();
       expect(message).toContain(validUser.username);
@@ -56,30 +48,13 @@ test.describe('Feature: FashionHub Account Page', () => {
     });
   });
 
-  // ── Scenario 3 — Logout button visible ───────────────────────────────────────
-  test('@regression Scenario: Logout button is visible when logged in', async ({
-    loginPage,
-    accountPage,
-  }) => {
-    await Given('I am logged in as a valid user', async () => {
-      await loginAndGoToAccount(loginPage, accountPage);
-    });
-
+  test('@smoke Scenario: Logout button is visible when logged in', async ({ accountPage }) => {
     await Then('the account page should confirm I am authenticated', async () => {
-      const isLoggedIn = await accountPage.isLoggedIn();
-      expect(isLoggedIn).toBe(true);
+      expect(await accountPage.isLoggedIn()).toBe(true);
     });
   });
 
-  // ── Scenario 4 — Logout ────────────────────────────────────────────────────
-  test('@regression Scenario: Clicking Logout redirects away from the account page', async ({
-    loginPage,
-    accountPage,
-  }) => {
-    await Given('I am logged in as a valid user', async () => {
-      await loginAndGoToAccount(loginPage, accountPage);
-    });
-
+  test('@regression Scenario: Clicking Logout redirects away from the account page', async ({ accountPage }) => {
     await When('I click the Logout button', async () => {
       await accountPage.logout();
     });
@@ -89,18 +64,16 @@ test.describe('Feature: FashionHub Account Page', () => {
     });
   });
 
-  // ── Scenario 5 — Access control ──────────────────────────────────────────────
-  test('@regression Scenario: Unauthenticated user sees no welcome message', async ({
-    accountPage,
-  }) => {
-    await Given('I am NOT logged in', async () => {
+  // Access control — override beforeEach by navigating directly without login
+  test('@regression Scenario: Unauthenticated user sees no welcome message', async ({ accountPage }) => {
+    // Navigate directly without login (overrides the beforeEach logged-in state)
+    await Given('I am NOT logged in and navigate directly', async () => {
       await accountPage.navigate(AccountPage.PATH);
       await accountPage.page.waitForLoadState('domcontentloaded');
     });
 
     await Then('the welcome message should not be visible', async () => {
-      const isLoggedIn = await accountPage.isLoggedIn();
-      expect(isLoggedIn).toBe(false);
+      expect(await accountPage.isLoggedIn()).toBe(false);
     });
   });
 });
