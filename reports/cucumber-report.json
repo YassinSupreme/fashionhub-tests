@@ -407,6 +407,75 @@
     "uri": "tests/auth/login.feature"
   },
   {
+    "description": "  As a shopper\n  I want to manage my shopping cart\n  So that I can review and purchase my items",
+    "elements": [
+      {
+        "description": "",
+        "id": "fashionhub-shopping-cart;empty-cart-is-handled-gracefully",
+        "keyword": "Scenario",
+        "line": 8,
+        "name": "Empty cart is handled gracefully",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "I am on the Cart page",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:20"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 10,
+            "name": "the cart page loads without errors",
+            "match": {
+              "location": "tests/bdd/step_definitions/common.steps.ts:166"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke",
+            "line": 7
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "fashionhub-shopping-cart",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "FashionHub Shopping Cart",
+    "tags": [],
+    "uri": "tests/cart/cart.feature"
+  },
+  {
     "description": "  As a visitor\n  I want to see the FashionHub home page\n  So that I can explore the shop",
     "elements": [
       {

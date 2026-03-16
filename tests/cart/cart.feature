@@ -4,6 +4,7 @@ Feature: FashionHub Shopping Cart
   I want to manage my shopping cart
   So that I can review and purchase my items
 
+  @smoke
   Scenario: Empty cart is handled gracefully
     Given I am on the Cart page
     Then the cart page loads without errors
@@ -15,6 +16,7 @@ Feature: FashionHub Shopping Cart
     And I navigate to the Cart page
     Then the cart contains at least one item
 
+  @regression
   Scenario: Cart shows correct total after adding a product
     Given I am on the Products page
     When I add the first product to the cart
@@ -29,6 +31,7 @@ Feature: FashionHub Shopping Cart
     And I remove the first cart item
     Then the cart item count decreases
 
+  @regression
   Scenario: Clicking Checkout shows a confirmation dialog
     Given I am on the Products page
     When I add the first product to the cart
