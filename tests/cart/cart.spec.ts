@@ -1,127 +1,117 @@
 import { test, expect } from '../../src/fixtures/index';
+import { Given, When, Then, And } from '../../src/utils/bdd';
 
 /**
  * Feature: Shopping Cart Page
  *
- * Tests the FashionHub cart page covering:
- *   🟡 Smoke:       page loads with correct title
- *   ✅ Happy Path:  empty state, add item and verify, total format, remove item
- *   🛒 Checkout:    dialog confirmation and page stays on cart
+ * Tests the FashionHub cart page using Given / When / Then BDD style.
+ * Linked feature file: tests/cart/cart.feature
  */
 test.describe('Feature: FashionHub Shopping Cart', () => {
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // Scenario 1 — Smoke
-  // ──────────────────────────────────────────────────────────────────────────
-  test(
-    'Smoke: Cart page loads with the correct title',
-    async ({ cartPage }) => {
+  // ── Scenario 1 — Smoke ──────────────────────────────────────────────────────
+  test('Smoke: Cart page loads with the correct title', async ({ cartPage }) => {
+    await Given('I navigate to the Cart page', async () => {
       await cartPage.goto();
+    });
 
+    await Then('the page title should be "Shopping Cart - FashionHub"', async () => {
       const title = await cartPage.getTitle();
       expect(title).toBe('Shopping Cart - FashionHub');
-    },
-  );
+    });
+  });
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // Scenario 2 — Empty cart
-  // ──────────────────────────────────────────────────────────────────────────
-  test(
-    'Scenario: Visiting the cart with no items is gracefully handled',
-    async ({ cartPage }) => {
+  // ── Scenario 2 — Empty cart ───────────────────────────────────────────────────
+  test('Scenario: Visiting an empty cart is gracefully handled', async ({ cartPage }) => {
+    await Given('I am on the Cart page with no items', async () => {
       await cartPage.goto();
+    });
 
-      // Cart may be empty or have items — either way the page should not crash
+    await Then('the page should load without errors', async () => {
       const url = cartPage.getCurrentUrl();
       expect(url).toMatch(/cart\.html/);
-    },
-  );
+    });
+  });
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // Scenario 3 — Item appears after Add to Cart
-  // ──────────────────────────────────────────────────────────────────────────
-  test(
-    'Scenario: Adding a product on the products page shows it in the cart',
-    async ({ productsPage, cartPage }) => {
-      // Given a user adds a product on the products page
+  // ── Scenario 3 — Item appears after Add to Cart ───────────────────────────────
+  test('Scenario: Adding a product shows it in the cart', async ({ productsPage, cartPage }) => {
+    await Given('I am on the Products page', async () => {
       await productsPage.goto();
+    });
+
+    await When('I add "Peacock Coat" to the cart', async () => {
       await productsPage.addProductToCart('Peacock Coat');
+    });
 
-      // When the user navigates to the cart
+    await And('I navigate to the Cart page', async () => {
       await cartPage.goto();
+    });
 
-      // Then the item should be in the cart
+    await Then('the cart should contain at least one item', async () => {
       const itemCount = await cartPage.getCartItemCount();
       expect(itemCount).toBeGreaterThan(0);
+    });
 
+    await And('"Peacock Coat" should appear in the cart item list', async () => {
       const itemNames = await cartPage.getCartItemNames();
       expect(itemNames).toContain('Peacock Coat');
-    },
-  );
+    });
+  });
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // Scenario 4 — Cart total is displayed
-  // ──────────────────────────────────────────────────────────────────────────
-  test(
-    'Scenario: Cart displays a total amount after adding a product',
-    async ({ productsPage, cartPage }) => {
-      // Given a product is in the cart
+  // ── Scenario 4 — Cart total ────────────────────────────────────────────────────
+  test('Scenario: Cart displays a total amount after adding a product', async ({ productsPage, cartPage }) => {
+    await Given('a product has been added to the cart', async () => {
       await productsPage.goto();
       await productsPage.addProductToCart('Peacock Coat');
-
       await cartPage.goto();
+    });
 
-      // Then the total should be visible and contain a dollar amount
+    await Then('the total should display a valid dollar amount', async () => {
       const total = await cartPage.getTotal();
       expect(total).toMatch(/\$\d+\.\d{2}/);
-    },
-  );
+    });
+  });
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // Scenario 5 — Remove item
-  // ──────────────────────────────────────────────────────────────────────────
-  test(
-    'Scenario: Removing an item decreases the cart item count',
-    async ({ productsPage, cartPage }) => {
-      // Given a product is in the cart
+  // ── Scenario 5 — Remove item ──────────────────────────────────────────────────
+  test('Scenario: Removing an item decreases the cart count', async ({ productsPage, cartPage }) => {
+    await Given('"Peacock Coat" is in the cart', async () => {
       await productsPage.goto();
       await productsPage.addProductToCart('Peacock Coat');
-
       await cartPage.goto();
-      const countBefore = await cartPage.getCartItemCount();
-      expect(countBefore).toBeGreaterThan(0);
+    });
 
-      // When the user removes the item
+    const countBefore = await cartPage.getCartItemCount();
+
+    await When('I click the remove button for "Peacock Coat"', async () => {
       await cartPage.removeItem('Peacock Coat');
+    });
 
-      // Then the cart should have one fewer item
+    await Then('the cart item count should decrease by one', async () => {
       const countAfter = await cartPage.getCartItemCount();
       expect(countAfter).toBe(countBefore - 1);
-    },
-  );
+    });
+  });
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // Scenario 6 — Checkout flow
-  // ──────────────────────────────────────────────────────────────────────────
-  test(
-    'Scenario: Checking out triggers a confirmation dialog and stays on the cart page',
-    async ({ productsPage, cartPage }) => {
-      // Given there is at least one product in the cart
+  // ── Scenario 6 — Checkout ─────────────────────────────────────────────────────
+  test('Scenario: Checkout triggers a confirmation dialog and stays on cart', async ({ productsPage, cartPage }) => {
+    await Given('at least one product is in the cart', async () => {
       await productsPage.goto();
       await productsPage.addProductToCart('Peacock Coat');
       await cartPage.goto();
+      expect(await cartPage.getCartItemCount()).toBeGreaterThan(0);
+    });
 
-      const itemCountBefore = await cartPage.getCartItemCount();
-      expect(itemCountBefore).toBeGreaterThan(0);
+    await When('I click the Checkout button', async () => {
+      // clickCheckoutAndGetDialog auto-accepts the dialog and returns its message
+    });
 
-      // When the user clicks "Checkout"
+    await Then('a confirmation dialog should appear', async () => {
       const dialogMessage = await cartPage.clickCheckoutAndGetDialog();
-
-      // Then a browser dialog should appear confirming the checkout intent
       expect(dialogMessage).toMatch(/proceeding to checkout/i);
+    });
 
-      // And the user should remain on the cart page (checkout is a placeholder)
+    await And('I should remain on the Cart page', async () => {
       await expect(cartPage.page).toHaveURL(/cart\.html/);
-    },
-  );
+    });
+  });
 });
