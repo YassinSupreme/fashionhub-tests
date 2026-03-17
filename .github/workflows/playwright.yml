@@ -72,7 +72,7 @@ jobs:
 
       - name: Upload blob report (for merge job)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: blob-report-${{ matrix.browser }}-shard-${{ matrix.shardIndex }}
           path: blob-report/
@@ -80,7 +80,7 @@ jobs:
 
       - name: Upload test results (traces & screenshots on failure)
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: test-results-${{ matrix.browser }}-shard-${{ matrix.shardIndex }}
           path: test-results/
@@ -108,7 +108,7 @@ jobs:
         run: npx playwright test --project=chromium --grep @smoke
       - name: Upload smoke blob report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: blob-report-smoke
           path: blob-report/
@@ -142,7 +142,7 @@ jobs:
         run: npx playwright merge-reports --reporter html ./all-blob-reports
 
       - name: Upload unified HTML report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report-merged
           path: playwright-report/
