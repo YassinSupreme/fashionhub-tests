@@ -1,5 +1,6 @@
 import { chromium, FullConfig } from '@playwright/test';
 import { validUser } from '../src/data/users';
+import { resolveBaseUrl } from '../src/utils/env';
 
 /**
  * global-setup.ts
@@ -17,7 +18,7 @@ async function globalSetup(_config: FullConfig): Promise<void> {
   const page = await context.newPage();
 
   // Navigate to login and authenticate
-  const baseURL = process.env.BASE_URL ?? 'https://pocketaces2.github.io/fashionhub/';
+  const baseURL = resolveBaseUrl();
   await page.goto(`${baseURL}login.html`);
   await page.locator('input[name="username"]').fill(validUser.username);
   await page.locator('input[name="password"]').fill(validUser.password);
