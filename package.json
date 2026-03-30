@@ -34,7 +34,7 @@
     "@cucumber/pretty-formatter": "^3.2.0",
     "@playwright/test": "^1.51.0",
     "@typescript-eslint/eslint-plugin": "^8.57.0",
-    "@typescript-eslint/parser": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.2",
     "dotenv": "^16.4.7",
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
